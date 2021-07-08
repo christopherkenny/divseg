@@ -1,0 +1,15 @@
+template:
+  params:
+    bootswatch: journal
+reference:
+- title: "Estimating Diversity Indices"
+  desc: "Functions for estimating aspatial diversity indices"
+- contents:
+  - has_concept("div")
+- title: "Estimating Segregation Indices"
+  desc: "Functions for estimating aspatial diversity indices"
+- contents:
+  - has_concept("seg")
+- title: "Included Example Data"
+- contents:
+  - has_concept("data")
