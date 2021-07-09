@@ -24,3 +24,4 @@ Imports:
 Depends: 
     R (>= 2.10)
 Config/testthat/edition: 3
+URL: https://christopherkenny.github.io/divseg
