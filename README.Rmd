@@ -62,3 +62,10 @@ de_county %>%
   dplyr::relocate(blau, delta)
 ```
 
+Each function has a partner that can go inside calls to `dplyr::mutate()` by dropping the `ds_` prefix:
+```{r}
+de_county %>% 
+  dplyr::mutate(herf = hhi(starts_with('pop_'))) %>% 
+  dplyr::relocate(herf)
+```
+

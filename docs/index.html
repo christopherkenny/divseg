@@ -84,7 +84,12 @@ install.packages("divseg")
 <a href="#example" class="anchor"></a>Example</h2>
 <p>The basic workflow relies on a <code>tibble</code> where each row represents a geography and has columns that represent some form of population data.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://christopherkenny.github.io/divseg">divseg</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://christopherkenny.github.io/divseg">divseg</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'divseg'</span>
+<span class="co">#&gt; The following object is masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     interaction</span></code></pre></div>
 <p><code>divseg</code> comes with two example datasets. <code>de_county</code> contains 2010 Census data on the counties in Delaware. <code>de_tract</code> likewise has 2010 Census data on the tracts in Delaware.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">'de_county'</span><span class="op">)</span>
@@ -107,10 +112,30 @@ install.packages("divseg")
 <span class="co">#&gt; # A tibble: 3 x 23</span>
 <span class="co">#&gt;    blau delta GEOID NAME     pop pop_white pop_black pop_hisp pop_aian pop_asian</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 0.516 0.345 10001 Kent… 162310    105891     37812     9346      916      3266</span>
-<span class="co">#&gt; 2 0.557 0.345 10003 New … 538479    331836    124426    46921      984     23132</span>
-<span class="co">#&gt; 3 0.405 0.345 10005 Suss… 197145    149025     24544    16954      924      1910</span>
-<span class="co">#&gt; # … with 13 more variables: pop_nhpi &lt;dbl&gt;, pop_other &lt;dbl&gt;, pop_two &lt;dbl&gt;,</span>
+<span class="co">#&gt; 1 0.516 0.345 10001 Kent~ 162310    105891     37812     9346      916      3266</span>
+<span class="co">#&gt; 2 0.557 0.345 10003 New ~ 538479    331836    124426    46921      984     23132</span>
+<span class="co">#&gt; 3 0.405 0.345 10005 Suss~ 197145    149025     24544    16954      924      1910</span>
+<span class="co">#&gt; # ... with 13 more variables: pop_nhpi &lt;dbl&gt;, pop_other &lt;dbl&gt;, pop_two &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   vap &lt;dbl&gt;, vap_white &lt;dbl&gt;, vap_black &lt;dbl&gt;, vap_hisp &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   vap_aian &lt;dbl&gt;, vap_asian &lt;dbl&gt;, vap_nhpi &lt;dbl&gt;, vap_other &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   vap_two &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [°]&gt;</span></code></pre></div>
+<p>Each function has a partner that can go inside calls to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> by dropping the <code>ds_</code> prefix:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">de_county</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>herf <span class="op">=</span> <span class="fu"><a href="reference/ds_hhi.html">hhi</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'pop_'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">herf</span><span class="op">)</span>
+<span class="co">#&gt; Simple feature collection with 3 features and 21 fields</span>
+<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: -75.78866 ymin: 38.45101 xmax: -75.04894 ymax: 39.83901</span>
+<span class="co">#&gt; Geodetic CRS:  NAD83</span>
+<span class="co">#&gt; # A tibble: 3 x 22</span>
+<span class="co">#&gt;    herf GEOID NAME           pop pop_white pop_black pop_hisp pop_aian pop_asian</span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 0.484 10001 Kent Count~ 162310    105891     37812     9346      916      3266</span>
+<span class="co">#&gt; 2 0.443 10003 New Castle~ 538479    331836    124426    46921      984     23132</span>
+<span class="co">#&gt; 3 0.595 10005 Sussex Cou~ 197145    149025     24544    16954      924      1910</span>
+<span class="co">#&gt; # ... with 13 more variables: pop_nhpi &lt;dbl&gt;, pop_other &lt;dbl&gt;, pop_two &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   vap &lt;dbl&gt;, vap_white &lt;dbl&gt;, vap_black &lt;dbl&gt;, vap_hisp &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   vap_aian &lt;dbl&gt;, vap_asian &lt;dbl&gt;, vap_nhpi &lt;dbl&gt;, vap_other &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   vap_two &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [°]&gt;</span></code></pre></div>
