@@ -28,4 +28,4 @@ data('de_county')
 ds_interaction(de_county, c(pop_white, starts_with('pop_')))
 ds_interaction(de_county, starts_with('pop_'), 'interaction')
 }
-\concept{seg}
+\concept{exposure}

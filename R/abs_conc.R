@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @md
-#' @concept seg
+#' @concept concentration
 #' @examples
 #' data("de_county")
 #' ds_abs_conc(de_county, c(pop_black, starts_with('pop_')))
@@ -44,7 +44,7 @@ ds_abs_conc <- function(.data, .cols, .name){
                   .x = dplyr::first(dplyr::cur_data())) %>%
     dplyr::ungroup()
 
-  sub$.a <- as.numeric(sf::st_area(.data))
+  sub$.a <- calc_area(.data)
 
   .X <- sum(sub$.x)
   .A <- sum(sub$.a)
@@ -58,7 +58,7 @@ ds_abs_conc <- function(.data, .cols, .name){
   .n2_sum <- calc_n2_sum(sub, .X)
 
   out <- sub %>%
-    dplyr::mutate(!!.name := 1 - ((sum(.x * .a/.X) - .n1_sum)/(.n2_sum - .n1_sum)) ) %>%
+    dplyr::mutate(!!.name := 1 - ((sum(.data$.x * .data$.a/.X) - .n1_sum)/(.n2_sum - .n1_sum)) ) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {

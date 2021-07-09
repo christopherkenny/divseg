@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @md
-#' @concept seg
+#' @concept evenness
 #' @examples
 #' data("de_county")
 #' ds_dissim(de_county, c(pop_white, starts_with('pop_')))
@@ -44,8 +44,8 @@ ds_dissim <- function(.data, .cols, .name, .comp = FALSE){
   .P <- sum(dplyr::first(sub))/.T
 
   out <- sub %>%
-    if_rowwise(.comp) %>%
-    dplyr::mutate(!!.name := 0.5 * sum(.total * abs(dplyr::first(dplyr::cur_data())/.total - .P))
+    rowwise_if(.comp) %>%
+    dplyr::mutate(!!.name := 0.5 * sum(.data$.total * abs(dplyr::first(dplyr::cur_data())/.data$.total - .P))
                   /(.T * .P * (1 - .P)) ) %>%
     dplyr::pull(!!.name)
 

@@ -6,10 +6,26 @@ reference:
   desc: "Functions for estimating aspatial diversity indices"
 - contents:
   - has_concept("div")
-- title: "Estimating Segregation Indices"
-  desc: "Functions for estimating aspatial diversity indices"
+- title: "Evenness Segregation Indices"
+  desc: "Functions for estimating segregation indices of evenness"
 - contents:
-  - has_concept("seg")
+  - has_concept("evenness")
+- title: "Exposure Segregation Indices"
+  desc: "Functions for estimating segregation indices of exposure"
+- contents:
+  - has_concept("exposure")
+- title: "Concentration Segregation Indices"
+  desc: "Functions for estimating segregation indices of concentration"
+- contents:
+  - has_concept("concentration")
+- title: "Centralization Segregation Indices"
+  desc: "Functions for estimating segregation indices of centralization"
+- contents:
+  - has_concept("centralization")
+- title: "Clustering Segregation Indices"
+  desc: "Functions for estimating segregation indices of clustering"
+- contents:
+  - has_concept("clustering")
 - title: "Included Example Data"
 - contents:
   - has_concept("data")

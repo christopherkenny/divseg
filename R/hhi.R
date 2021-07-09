@@ -1,5 +1,7 @@
 #' Compute Herfindahl-Hirshman Index
 #'
+#' This is equivalent to the Simpson Index.
+#'
 #' @param .data [tibble][tibble::tibble-package]
 #' @param .cols [`tidy-select`](https://tidyselect.r-lib.org/reference/language.html)
 #' Columns to compute the measure with.
@@ -27,8 +29,7 @@ ds_hhi <- function(.data, .cols, .name){
   out <- .data %>% drop_sf() %>%
     dplyr::rowwise() %>%
     dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(!!.name := rowSums((dplyr::select(dplyr::cur_data(), !!.cols)/.data$.total)^2)) %>%
+    dplyr::mutate(!!.name := sum((dplyr::select(dplyr::cur_data(), !!.cols)/.data$.total)^2)) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {

@@ -26,4 +26,4 @@ data("de_county")
 ds_abs_conc(de_county, c(pop_black, starts_with('pop_')))
 ds_abs_conc(de_county, c(pop_black, starts_with('pop_')), 'abs_conc')
 }
-\concept{seg}
+\concept{concentration}

@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @md
-#' @concept seg
+#' @concept concentration
 #' @examples
 #' data("de_county")
 #' ds_delta(de_county, c(pop_white, starts_with('pop_')))
@@ -44,14 +44,14 @@ ds_delta <- function(.data, .cols, .name, .comp = FALSE){
     dplyr::mutate(.x = dplyr::first(dplyr::cur_data())) %>%
     dplyr::ungroup()
 
-  sub$.a <- as.numeric(sf::st_area(.data))
+  sub$.a <- calc_area(.data)
 
   .X <- sum(sub$.x)
   .A <- sum(sub$.a)
 
   out <- sub %>%
-    if_rowwise(.comp) %>%
-    dplyr::mutate(!!.name := 0.5 * sum(abs(.x/.X - .a/.A)) ) %>%
+    rowwise_if(.comp) %>%
+    dplyr::mutate(!!.name := 0.5 * sum(abs(.data$.x/.X - .data$.a/.A)) ) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {

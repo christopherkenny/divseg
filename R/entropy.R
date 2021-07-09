@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @md
-#' @concept seg
+#' @concept evenness
 #' @examples
 #' data("de_county")
 #' ds_entropy(de_county, c(pop_white, starts_with('pop_')))
@@ -44,10 +44,10 @@ ds_entropy <- function(.data, .cols, .name, .comp = FALSE){
   .E <- .P * plog (1/.P) + (1 - .P) * plog (1/(1 - .P))
 
   out <- sub %>%
-    dplyr::mutate(.p = dplyr::first(dplyr::cur_data())/.total,
-                  .e =  .p * plog (1/.p) + (1 - .p) * plog (1/(1 - .p))) %>%
-    if_rowwise(.comp) %>%
-    dplyr::mutate(!!.name := sum(.total * (.E * .e))/(.E * .T) ) %>%
+    dplyr::mutate(.p = dplyr::first(dplyr::cur_data())/.data$.total,
+                  .e =  .data$.p * plog (1/.data$.p) + (1 - .data$.p) * plog (1/(1 - .data$.p))) %>%
+    rowwise_if(.comp) %>%
+    dplyr::mutate(!!.name := sum(.data$.total * (.E * .data$.e))/(.E * .T) ) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {

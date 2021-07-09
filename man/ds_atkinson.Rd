@@ -28,4 +28,4 @@ data('de_county')
 ds_atkinson(de_county, c(pop_white, starts_with('pop_')))
 ds_atkinson(de_county, starts_with('pop_'), 'atkinson')
 }
-\concept{seg}
+\concept{evenness}

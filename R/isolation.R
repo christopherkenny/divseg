@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @md
-#' @concept seg
+#' @concept exposure
 #' @examples
 #' data('de_county')
 #' ds_isolation(de_county, c(pop_white, starts_with('pop_')))
@@ -43,8 +43,8 @@ ds_isolation <- function(.data, .cols, .name, .comp = FALSE) {
   .X <- sum(sub$.x)
 
   out <- sub %>%
-    if_rowwise(.comp) %>%
-    dplyr::mutate(!!.name := sum((.x/.X)*(.x/.total))) %>%
+    rowwise_if(.comp) %>%
+    dplyr::mutate(!!.name := sum((.data$.x/.X)*(.data$.x/.data$.total))) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {

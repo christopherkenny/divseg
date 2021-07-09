@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @md
-#' @concept seg
+#' @concept exposure
 #' @examples
 #' data('de_county')
 #' ds_correlation(de_county, c(pop_white, starts_with('pop_')))
@@ -44,7 +44,7 @@ ds_correlation <- function(.data, .cols, .name) {
   .P <- sum(dplyr::first(sub)) / .T
 
   out <- sub %>%
-    dplyr::mutate(!!.name := (sum((.x/.X)*(.x/.total)) - .P)/(1 - .P)) %>%
+    dplyr::mutate(!!.name := (sum((.data$.x/.X)*(.data$.x/.data$.total)) - .P)/(1 - .P)) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {

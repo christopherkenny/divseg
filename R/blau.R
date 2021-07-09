@@ -28,8 +28,7 @@ ds_blau <- function(.data, .cols, .name){
     drop_sf() %>%
     dplyr::rowwise() %>%
     dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(!!.name := 1 - rowSums((dplyr::select(dplyr::cur_data(), !!.cols)/.data$.total)^2)) %>%
+    dplyr::mutate(!!.name := 1 - sum((dplyr::select(dplyr::cur_data(), !!.cols)/.data$.total)^2)) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {

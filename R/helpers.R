@@ -27,13 +27,21 @@ plog <- function(x){
 
 #' Conditional rowwise()
 #' @keywords internal
-if_rowwise <- function(.data, cond) {
+rowwise_if <- function(.data, cond) {
   if (cond) {
     .data %>% dplyr::rowwise()
   } else {
     .data
   }
 }
+
+#' Calculate Area
+#' Ensure it's converted to km^2 then dropped
+#' @keywords internal
+calc_area <- function(.data) {
+  units::drop_units(units::set_units(sf::st_area(.data), km^2))
+}
+
 
 #' Calculate conc sum from n1 to n
 #' \deqn{\sum_{i=1}^{n1}\frac{t_i*a_i}{T_1}}
@@ -63,4 +71,63 @@ calc_n2_sum <- function(.data, .X) {
     dplyr::mutate(.ta = .data$.total * .data$.a)
 
   (.data %>% dplyr::pull(.data$.ta) %>% sum())/(.data %>% dplyr::pull(.data$.total) %>% sum())
+}
+
+#' Calculate d matrix
+#' @keywords internal
+calc_d <- function(.data){
+  suppressWarnings(
+    dmat <- sf::st_distance(sf::st_centroid(.data))
+  )
+  dmat <- units::drop_units(units::set_units(dmat, km))
+  diag(dmat) <- sqrt(.data$.a)^0.5
+
+  dmat
+}
+
+#' Calculate c matrix
+#' @keywords internal
+calc_c <- function(.data){
+  exp(-1 * calc_d(.data))
+}
+
+#' Calculate Pgg matrix
+#' @keywords internal
+calc_pgg <- function(.data, .g){
+  .c <- calc_c(.data)
+  .N <- length(.g)
+  .gmat <- matrix(data = rep(.g, .N), nrow = .N, ncol = .N, byrow = TRUE)
+
+  sum(.gmat * .c)/sum(.g)^2
+}
+
+#' Calculate k matrix
+#' @keywords internal
+calc_k <- function(.data, .total){
+  .d <- calc_d(.data)
+  .N <- nrow(.data)
+  .tmat <- matrix(data = rep(.total, .N), nrow = .N, ncol = .N, byrow = TRUE)
+
+  rowSums(.tmat*(-1 * .d))/sum(.tmat*(-1 * .d))
+}
+
+
+#' Weighted Centroid
+#' @keywords internal
+calc_weighted_centroid<- function(.data, .wt) {
+  suppressWarnings(
+    .coords <- sf::st_coordinates(sf::st_centroid(.data))
+  )
+
+  sf::st_sfc(sf::st_point(c(stats::weighted.mean(x = .coords[, 1], w = .wt),
+                            stats::weighted.mean(x = .coords[, 2], w = .wt))),
+             crs = sf::st_crs(.data))
+}
+
+#' Distance to Point
+#' @keywords internal
+calc_dist_centroid<- function(.data) {
+  .pt <- calc_weighted_centroid(.data)
+
+  units::drop_units(units::set_units(sf::st_distance(.pt, .data), km ))
 }

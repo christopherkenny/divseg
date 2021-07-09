@@ -28,4 +28,4 @@ data('de_county')
 ds_isolation(de_county, c(pop_white, starts_with('pop_')))
 ds_isolation(de_county, starts_with('pop_'), 'isolation')
 }
-\concept{seg}
+\concept{exposure}

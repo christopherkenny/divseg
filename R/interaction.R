@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @md
-#' @concept seg
+#' @concept exposure
 #' @examples
 #' data('de_county')
 #' ds_interaction(de_county, c(pop_white, starts_with('pop_')))
@@ -38,14 +38,14 @@ ds_interaction <- function(.data, .cols, .name, .comp = FALSE) {
     dplyr::rowwise() %>%
     dplyr::mutate(.total = sum(dplyr::c_across()),
                   .x = dplyr::first(dplyr::cur_data()),
-                  .y = .total - .x) %>%
+                  .y = .data$.total - .data$.x) %>%
     dplyr::ungroup()
 
   .X <- sum(sub$.x)
 
   out <- sub %>%
-    if_rowwise(.comp) %>%
-    dplyr::mutate(!!.name := sum((.x/.X)*(.y/.total))) %>%
+    rowwise_if(.comp) %>%
+    dplyr::mutate(!!.name := sum((.data$.x/.X)*(.data$.y/.data$.total))) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {

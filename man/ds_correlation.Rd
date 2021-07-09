@@ -26,4 +26,4 @@ data('de_county')
 ds_correlation(de_county, c(pop_white, starts_with('pop_')))
 ds_correlation(de_county, starts_with('pop_'), 'correlation')
 }
-\concept{seg}
+\concept{exposure}

@@ -28,4 +28,4 @@ data("de_county")
 ds_delta(de_county, c(pop_white, starts_with('pop_')))
 ds_delta(de_county, starts_with('pop_'), 'delta')
 }
-\concept{seg}
+\concept{concentration}

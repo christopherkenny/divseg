@@ -28,4 +28,4 @@ data("de_county")
 ds_gini(de_county, c(pop_white, starts_with('pop_')))
 ds_gini(de_county, starts_with('pop_'), 'gini')
 }
-\concept{seg}
+\concept{evenness}

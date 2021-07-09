@@ -28,4 +28,4 @@ data("de_county")
 ds_entropy(de_county, c(pop_white, starts_with('pop_')))
 ds_entropy(de_county, starts_with('pop_'), 'entropy')
 }
-\concept{seg}
+\concept{evenness}

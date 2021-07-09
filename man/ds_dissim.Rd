@@ -29,4 +29,4 @@ ds_dissim(de_county, c(pop_white, starts_with('pop_')))
 ds_dissim(de_county, c(pop_white, starts_with('pop_')), .comp = TRUE)
 ds_dissim(de_county, starts_with('pop_'), 'dissim')
 }
-\concept{seg}
+\concept{evenness}

@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @md
-#' @concept seg
+#' @concept evenness
 #' @examples
 #' data('de_county')
 #' ds_atkinson(de_county, c(pop_white, starts_with('pop_')))
@@ -46,10 +46,10 @@ ds_atkinson <- function(.data, .cols, .name, b = 0.5) {
   .P <- sum(dplyr::first(sub)) / .T
 
   out <- sub %>%
-    dplyr::mutate(.p = dplyr::first(dplyr::cur_data()) / .total) %>%
+    dplyr::mutate(.p = dplyr::first(dplyr::cur_data()) / .data$.total) %>%
     dplyr::mutate(!!.name := 1 - (.P / (1 - .P)) *
                     abs((1 / (.P * .T)) *
-                          sum((1 - .p)^(1 - b) * .p^b * .total)
+                          sum((1 - .data$.p)^(1 - b) * .data$.p^b * .data$.total)
                         )^(1 / (1 - b))) %>%
     dplyr::pull(!!.name)
 
