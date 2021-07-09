@@ -2,9 +2,12 @@
 % Please edit documentation in R/blau.R
 \name{ds_blau}
 \alias{ds_blau}
+\alias{blau}
 \title{Compute Blau's Index}
 \usage{
 ds_blau(.data, .cols, .name)
+
+blau(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -13,6 +16,8 @@ ds_blau(.data, .cols, .name)
 Columns to compute the measure with.}
 
 \item{.name}{name for column with Blau index. Leave missing to return a vector.}
+
+\item{...}{arguments to forward to ds_blau from blau}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

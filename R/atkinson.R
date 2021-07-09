@@ -61,3 +61,10 @@ ds_atkinson <- function(.data, .cols, .name, b = 0.5) {
     out
   }
 }
+
+#' @rdname ds_atkinson
+#' @param ... arguments to forward to ds_atkinson from atkinson
+#' @export
+atkinson <- function(..., .data = dplyr::cur_data_all()) {
+  ds_atkinson(.data = .data, ...)
+}

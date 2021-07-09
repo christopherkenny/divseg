@@ -2,9 +2,12 @@
 % Please edit documentation in R/rel_conc.R
 \name{ds_rel_conc}
 \alias{ds_rel_conc}
+\alias{rel_conc}
 \title{Compute Relative Concentration}
 \usage{
 ds_rel_conc(.data, .cols, .name)
+
+rel_conc(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}
@@ -14,6 +17,8 @@ Columns to compute the measure with. Must be at least 2 columns. If more than 2,
 first column as first group and sum of other columns as second.}
 
 \item{.name}{name for column with relative concentration. Leave missing to return a vector.}
+
+\item{...}{arguments to forward to ds_rel_conc from rel_conc}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

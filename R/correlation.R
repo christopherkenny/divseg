@@ -55,3 +55,10 @@ ds_correlation <- function(.data, .cols, .name) {
     out
   }
 }
+
+#' @rdname ds_correlation
+#' @param ... arguments to forward to ds_correlation from correlation
+#' @export
+correlation <- function(..., .data = dplyr::cur_data_all()) {
+  ds_correlation(.data = .data, ...)
+}

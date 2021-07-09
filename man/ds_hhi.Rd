@@ -2,12 +2,18 @@
 % Please edit documentation in R/hhi.R, R/simpson.R
 \name{ds_hhi}
 \alias{ds_hhi}
+\alias{hhi}
 \alias{ds_simpson}
+\alias{simpson}
 \title{Compute Herfindahl-Hirshman Index}
 \usage{
 ds_hhi(.data, .cols, .name)
 
+hhi(..., .data = dplyr::cur_data_all())
+
 ds_simpson(.data, .cols, .name)
+
+simpson(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -16,6 +22,8 @@ ds_simpson(.data, .cols, .name)
 Columns to compute the measure with.}
 
 \item{.name}{name for column with HHI. Leave missing to return a vector.}
+
+\item{...}{arguments to forward to ds_hhi from hhi}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

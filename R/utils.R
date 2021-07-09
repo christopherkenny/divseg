@@ -2,7 +2,7 @@
 
 template_mutate <-
   "#' @rdname ``fn_name``
-#' ... arguments to forward to ``fn_name`` from ``fun``
+#' @param ... arguments to forward to ``fn_name`` from ``fun``
 #' @export
   ``fun`` <- function(..., .data = dplyr::cur_data_all()){
   ``fn_name``(.data = .data, ...)

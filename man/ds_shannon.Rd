@@ -2,9 +2,12 @@
 % Please edit documentation in R/shannon.R
 \name{ds_shannon}
 \alias{ds_shannon}
+\alias{shannon}
 \title{Compute Shannon Index}
 \usage{
 ds_shannon(.data, .cols, .name)
+
+shannon(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -13,6 +16,8 @@ ds_shannon(.data, .cols, .name)
 Columns to compute the measure with.}
 
 \item{.name}{name for column with Shannon index. Leave missing to return a vector.}
+
+\item{...}{arguments to forward to ds_shannon from shannon}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

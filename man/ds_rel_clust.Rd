@@ -2,9 +2,12 @@
 % Please edit documentation in R/rel_clust.R
 \name{ds_rel_clust}
 \alias{ds_rel_clust}
+\alias{rel_clust}
 \title{Compute Relative Clustering}
 \usage{
 ds_rel_clust(.data, .cols, .name)
+
+rel_clust(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}
@@ -14,6 +17,8 @@ Columns to compute the measure with. Must be at least 2 columns. If more than 2,
 first column as first group and sum of other columns as second.}
 
 \item{.name}{name for column with relative clustering. Leave missing to return a vector.}
+
+\item{...}{arguments to forward to ds_rel_clust from rel_clust}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

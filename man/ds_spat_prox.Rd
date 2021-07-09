@@ -2,9 +2,12 @@
 % Please edit documentation in R/spat_prox.R
 \name{ds_spat_prox}
 \alias{ds_spat_prox}
+\alias{spat_prox}
 \title{Compute Spatial Proximity}
 \usage{
 ds_spat_prox(.data, .cols, .name)
+
+spat_prox(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}
@@ -14,6 +17,8 @@ Columns to compute the measure with. Must be at least 2 columns. If more than 2,
 first column as first group and sum of other columns as second.}
 
 \item{.name}{name for column with spatial proximity. Leave missing to return a vector.}
+
+\item{...}{arguments to forward to ds_spat_prox from spat_prox}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

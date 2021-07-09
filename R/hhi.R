@@ -38,3 +38,10 @@ ds_hhi <- function(.data, .cols, .name){
     out
   }
 }
+
+#' @rdname ds_hhi
+#' @param ... arguments to forward to ds_hhi from hhi
+#' @export
+hhi <- function(..., .data = dplyr::cur_data_all()) {
+  ds_hhi(.data = .data, ...)
+}

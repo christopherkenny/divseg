@@ -2,9 +2,12 @@
 % Please edit documentation in R/gini.R
 \name{ds_gini}
 \alias{ds_gini}
+\alias{gini}
 \title{Compute Gini Index}
 \usage{
 ds_gini(.data, .cols, .name, .comp = FALSE)
+
+gini(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -16,6 +19,8 @@ first column as first group and sum of other columns as second.}
 \item{.name}{name for column with gini index. Leave missing to return a vector.}
 
 \item{.comp}{Default is FALSE. FALSE returns the sum, TRUE returns the components.}
+
+\item{...}{arguments to forward to ds_gini from gini}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

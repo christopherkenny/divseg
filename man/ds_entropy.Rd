@@ -2,9 +2,12 @@
 % Please edit documentation in R/entropy.R
 \name{ds_entropy}
 \alias{ds_entropy}
+\alias{entropy}
 \title{Compute Entropy Index}
 \usage{
 ds_entropy(.data, .cols, .name, .comp = FALSE)
+
+entropy(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -16,6 +19,8 @@ first column as first group and sum of other columns as second.}
 \item{.name}{name for column with entropy index. Leave missing to return a vector.}
 
 \item{.comp}{Default is FALSE. FALSE returns the sum, TRUE returns the components.}
+
+\item{...}{arguments to forward to ds_entropy from entropy}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

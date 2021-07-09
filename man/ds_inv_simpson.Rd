@@ -2,9 +2,12 @@
 % Please edit documentation in R/inv_simpson.R
 \name{ds_inv_simpson}
 \alias{ds_inv_simpson}
+\alias{inv_simpson}
 \title{Compute Simpson Index}
 \usage{
 ds_inv_simpson(.data, .cols, .name)
+
+inv_simpson(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -13,6 +16,8 @@ ds_inv_simpson(.data, .cols, .name)
 Columns to compute the measure with.}
 
 \item{.name}{name for column with Simpson Index Leave missing to return a vector.}
+
+\item{...}{arguments to forward to ds_inv_simpson from inv_simpson}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

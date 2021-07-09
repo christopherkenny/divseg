@@ -56,3 +56,10 @@ ds_entropy <- function(.data, .cols, .name, .comp = FALSE){
     out
   }
 }
+
+#' @rdname ds_entropy
+#' @param ... arguments to forward to ds_entropy from entropy
+#' @export
+entropy <- function(..., .data = dplyr::cur_data_all()) {
+  ds_entropy(.data = .data, ...)
+}

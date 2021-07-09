@@ -55,3 +55,10 @@ ds_dissim <- function(.data, .cols, .name, .comp = FALSE){
     out
   }
 }
+
+#' @rdname ds_dissim
+#' @param ... arguments to forward to ds_dissim from dissim
+#' @export
+dissim <- function(..., .data = dplyr::cur_data_all()) {
+  ds_dissim(.data = .data, ...)
+}

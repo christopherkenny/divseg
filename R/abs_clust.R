@@ -71,3 +71,10 @@ ds_abs_clust <- function(.data, .cols, .name){
     out
   }
 }
+
+#' @rdname ds_abs_clust
+#' @param ... arguments to forward to ds_abs_clust from abs_clust
+#' @export
+abs_clust <- function(..., .data = dplyr::cur_data_all()) {
+  ds_abs_clust(.data = .data, ...)
+}

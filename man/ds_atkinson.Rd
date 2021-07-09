@@ -2,9 +2,12 @@
 % Please edit documentation in R/atkinson.R
 \name{ds_atkinson}
 \alias{ds_atkinson}
+\alias{atkinson}
 \title{Compute Atkinson b Index}
 \usage{
 ds_atkinson(.data, .cols, .name, b = 0.5)
+
+atkinson(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -16,6 +19,8 @@ first column as first group and sum of other columns as second.}
 \item{.name}{name for column with Atkinson b index. Leave missing to return a vector.}
 
 \item{b}{Default 0.5. Exponent parameter b, where 0 <= b <= 1.}
+
+\item{...}{arguments to forward to ds_atkinson from atkinson}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

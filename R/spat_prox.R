@@ -66,3 +66,10 @@ ds_spat_prox <- function(.data, .cols, .name){
     out
   }
 }
+
+#' @rdname ds_spat_prox
+#' @param ... arguments to forward to ds_spat_prox from spat_prox
+#' @export
+spat_prox <- function(..., .data = dplyr::cur_data_all()) {
+  ds_spat_prox(.data = .data, ...)
+}

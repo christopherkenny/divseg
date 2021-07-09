@@ -67,3 +67,10 @@ ds_dd_interaction <- function(.data, .cols, .name, .comp = FALSE){
     out
   }
 }
+
+#' @rdname ds_dd_interaction
+#' @param ... arguments to forward to ds_dd_interaction from dd_interaction
+#' @export
+dd_interaction <- function(..., .data = dplyr::cur_data_all()) {
+  ds_dd_interaction(.data = .data, ...)
+}

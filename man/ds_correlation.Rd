@@ -2,9 +2,12 @@
 % Please edit documentation in R/correlation.R
 \name{ds_correlation}
 \alias{ds_correlation}
+\alias{correlation}
 \title{Compute Correlation Index}
 \usage{
 ds_correlation(.data, .cols, .name)
+
+correlation(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -14,6 +17,8 @@ Columns to compute the measure with. Must be at least 2 columns. If more than 2,
 first column as first group and sum of other columns as second.}
 
 \item{.name}{name for column with Correlation index. Leave missing to return a vector.}
+
+\item{...}{arguments to forward to ds_correlation from correlation}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

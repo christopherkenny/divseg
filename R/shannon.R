@@ -38,3 +38,10 @@ ds_shannon <- function(.data, .cols, .name){
     out
   }
 }
+
+#' @rdname ds_shannon
+#' @param ... arguments to forward to ds_shannon from shannon
+#' @export
+shannon <- function(..., .data = dplyr::cur_data_all()) {
+  ds_shannon(.data = .data, ...)
+}

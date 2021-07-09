@@ -44,3 +44,10 @@ ds_reyni <- function(.data, .cols, .name, q = 0) {
     out
   }
 }
+
+#' @rdname ds_reyni
+#' @param ... arguments to forward to ds_reyni from reyni
+#' @export
+reyni <- function(..., .data = dplyr::cur_data_all()) {
+  ds_reyni(.data = .data, ...)
+}

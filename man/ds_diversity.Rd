@@ -2,12 +2,18 @@
 % Please edit documentation in R/diversity.R, R/perplexity.R
 \name{ds_diversity}
 \alias{ds_diversity}
+\alias{diversity}
 \alias{ds_perplexity}
+\alias{perplexity}
 \title{Compute Diversity}
 \usage{
 ds_diversity(.data, .cols, .name, q = 1)
 
+diversity(..., .data = dplyr::cur_data_all())
+
 ds_perplexity(.data, .cols, .name, q = 1)
+
+perplexity(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -18,6 +24,8 @@ Columns to compute the measure with.}
 \item{.name}{name for column with diversity. Leave missing to return a vector.}
 
 \item{q}{exponent parameter. Default 0. Can not be 1.}
+
+\item{...}{arguments to forward to ds_diversity from diversity}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

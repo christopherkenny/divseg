@@ -2,9 +2,12 @@
 % Please edit documentation in R/dissim.R
 \name{ds_dissim}
 \alias{ds_dissim}
+\alias{dissim}
 \title{Compute Dissimilarity Index}
 \usage{
 ds_dissim(.data, .cols, .name, .comp = FALSE)
+
+dissim(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -16,6 +19,8 @@ first column as first group and sum of other columns as second.}
 \item{.name}{name for column with dissimilarity index. Leave missing to return a vector.}
 
 \item{.comp}{Default is FALSE. FALSE returns the sum, TRUE returns the components.}
+
+\item{...}{arguments to forward to ds_dissim from dissim}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

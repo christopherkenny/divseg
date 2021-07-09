@@ -2,9 +2,12 @@
 % Please edit documentation in R/reyni.R
 \name{ds_reyni}
 \alias{ds_reyni}
+\alias{reyni}
 \title{Compute Reyni Entropy}
 \usage{
 ds_reyni(.data, .cols, .name, q = 0)
+
+reyni(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}
@@ -15,6 +18,8 @@ Columns to compute the measure with.}
 \item{.name}{name for column with Reyni entropy. Leave missing to return a vector.}
 
 \item{q}{exponent parameter. Default 0. Can not be 1.}
+
+\item{...}{arguments to forward to ds_reyni from reyni}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

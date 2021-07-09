@@ -36,3 +36,10 @@ ds_inv_simpson <- function(.data, .cols, .name){
     out
   }
 }
+
+#' @rdname ds_inv_simpson
+#' @param ... arguments to forward to ds_inv_simpson from inv_simpson
+#' @export
+inv_simpson <- function(..., .data = dplyr::cur_data_all()) {
+  ds_inv_simpson(.data = .data, ...)
+}

@@ -2,9 +2,12 @@
 % Please edit documentation in R/abs_cent.R
 \name{ds_abs_cent}
 \alias{ds_abs_cent}
+\alias{abs_cent}
 \title{Compute Absolute Centralization}
 \usage{
 ds_abs_cent(.data, .cols, .name)
+
+abs_cent(..., .data = dplyr::cur_data_all())
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}
@@ -14,6 +17,8 @@ Columns to compute the measure with. Must be at least 2 columns. If more than 2,
 first column as first group and sum of other columns as second.}
 
 \item{.name}{name for column with absolute centralization. Leave missing to return a vector.}
+
+\item{...}{arguments to forward to ds_abs_cent from abs_cent}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing

@@ -37,3 +37,10 @@ ds_blau <- function(.data, .cols, .name){
     out
   }
 }
+
+#' @rdname ds_blau
+#' @param ... arguments to forward to ds_blau from blau
+#' @export
+blau <- function(..., .data = dplyr::cur_data_all()) {
+  ds_blau(.data = .data, ...)
+}

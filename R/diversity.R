@@ -43,3 +43,10 @@ ds_diversity <- function(.data, .cols, .name, q = 1) {
     out
   }
 }
+
+#' @rdname ds_diversity
+#' @param ... arguments to forward to ds_diversity from diversity
+#' @export
+diversity <- function(..., .data = dplyr::cur_data_all()) {
+  ds_diversity(.data = .data, ...)
+}

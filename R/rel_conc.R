@@ -73,3 +73,10 @@ ds_rel_conc <- function(.data, .cols, .name) {
     out
   }
 }
+
+#' @rdname ds_rel_conc
+#' @param ... arguments to forward to ds_rel_conc from rel_conc
+#' @export
+rel_conc <- function(..., .data = dplyr::cur_data_all()) {
+  ds_rel_conc(.data = .data, ...)
+}

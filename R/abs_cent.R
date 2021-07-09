@@ -68,3 +68,10 @@ ds_abs_cent <- function(.data, .cols, .name){
     out
   }
 }
+
+#' @rdname ds_abs_cent
+#' @param ... arguments to forward to ds_abs_cent from abs_cent
+#' @export
+abs_cent <- function(..., .data = dplyr::cur_data_all()) {
+  ds_abs_cent(.data = .data, ...)
+}

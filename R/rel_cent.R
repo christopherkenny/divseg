@@ -71,3 +71,10 @@ ds_rel_cent <- function(.data, .cols, .name){
     out
   }
 }
+
+#' @rdname ds_rel_cent
+#' @param ... arguments to forward to ds_rel_cent from rel_cent
+#' @export
+rel_cent <- function(..., .data = dplyr::cur_data_all()) {
+  ds_rel_cent(.data = .data, ...)
+}
