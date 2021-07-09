@@ -10,8 +10,10 @@ template_mutate <-
 
 
 use_mutate <- function(name = NULL, open = rlang::is_interactive()) {
-  name <- name %||% usethis:::get_active_r_file(path = 'R')
+  usethis::proj_path()
+  name <- name %||% usethis:::get_active_r_file(path ='R')
   path <- fs::path('R', name)
+  name <- usethis:::slug(name, "R")
   lines <- readr::read_lines(path)
 
   single <- sum(stringr::str_detect(lines, '<- function'))
