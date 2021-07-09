@@ -6,3 +6,4 @@
 ^docs$
 ^pkgdown$
 ^\.github$
+^R/utils\.R$
