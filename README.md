@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# divseg
+# divseg <a href='https://christopherkenny.github.io/divseg'><img src='man/figures/logo.png' align="right" height="120" /></a>
 
 <!-- badges: start -->
 
@@ -30,7 +30,7 @@ remotes::install_github("christopherkenny/divseg")
 
 ## Example
 
-The basic workflow relies on a `tibble` or `sf tibble` where each row represents a
+The basic workflow relies on a `tibble` where each row represents a
 geography and has columns that represent some form of population data.
 
 ``` r
