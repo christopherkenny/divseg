@@ -14,7 +14,7 @@ Suggests:
     roxygen2,
     testthat (>= 3.0.0)
 Imports: 
-    sf,
+    sf  (>= 1.0.0),
     rlang (>= 0.1.2),
     dplyr,
     magrittr,
