@@ -8,3 +8,4 @@
 ^\.github$
 ^R/utils\.R$
 ^cran-comments\.md$
+^CRAN-RELEASE$
