@@ -22,7 +22,7 @@ install.packages("divseg")
 -->
 
 You can install the released version of divseg from
-[GitHub](https://github.com/christopherkenny/divseg) with:
+[GitHub](https://github.com/christopherkenny/divseg/) with:
 
 ``` r
 remotes::install_github("christopherkenny/divseg")
