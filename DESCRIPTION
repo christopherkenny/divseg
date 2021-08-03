@@ -10,6 +10,8 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+BugReports: https://github.com/christopherkenny/divseg/issues
+URL: https://github.com/christopherkenny/divseg/, https://christopherkenny.github.io/divseg/
 Suggests: 
     roxygen2,
     testthat (>= 3.0.0)
@@ -24,4 +26,3 @@ Imports:
 Depends: 
     R (>= 2.10)
 Config/testthat/edition: 3
-URL: https://christopherkenny.github.io/divseg
