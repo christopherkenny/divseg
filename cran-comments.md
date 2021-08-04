@@ -14,4 +14,4 @@
 
 ## Additional Submission Notes
 
-* Adds missing `/` to url in README.
+* Adds missing `/` to logo url in README. Thank you. I added the `/` to the wrong link in the last submission.
