@@ -1,5 +1,6 @@
 #' Drop sf conditionally
 #' @keywords internal
+#' @noRd
 drop_sf <- function(.data) {
   if (inherits(.data, 'sf')) {
     sf::st_drop_geometry(.data)
@@ -10,6 +11,7 @@ drop_sf <- function(.data) {
 
 #' Moves sf column to last
 #' @keywords internal
+#' @noRd
 relocate_sf <- function(.data) {
   if (inherits(.data, 'sf')) {
     .data %>% dplyr::relocate(any_of(attr(.data, 'sf_column')), .after = last_col())
@@ -21,12 +23,14 @@ relocate_sf <- function(.data) {
 #' Pseudo Log
 #' log(0) = 0
 #' @keywords internal
+#' @noRd
 plog <- function(x){
   dplyr::if_else(x == 0, 0, log(x))
 }
 
 #' Conditional rowwise()
 #' @keywords internal
+#' @noRd
 rowwise_if <- function(.data, cond) {
   if (cond) {
     .data %>% dplyr::rowwise()
@@ -38,6 +42,7 @@ rowwise_if <- function(.data, cond) {
 #' Calculate Area
 #' Ensure it's converted to km^2 then dropped
 #' @keywords internal
+#' @noRd
 calc_area <- function(.data) {
   units::drop_units(units::set_units(sf::st_area(.data), km^2))
 }
@@ -46,6 +51,7 @@ calc_area <- function(.data) {
 #' Calculate conc sum from n1 to n
 #' \deqn{\sum_{i=1}^{n1}\frac{t_i*a_i}{T_1}}
 #' @keywords internal
+#' @noRd
 calc_n1_sum <- function(.data, .X) {
   .data <- .data %>%
     dplyr::mutate(.n1_rank = dplyr::row_number(.data$.a)) %>%
@@ -61,6 +67,7 @@ calc_n1_sum <- function(.data, .X) {
 #' Calculate conc sum from n2 to n
 #' \deqn{\sum_{i=n2}^{n}\frac{t_i*a_i}{T_2}}
 #' @keywords internal
+#' @noRd
 calc_n2_sum <- function(.data, .X) {
   .data <- .data %>%
     dplyr::mutate(.n2_rank = dplyr::row_number(dplyr::desc(.data$.a))) %>%
@@ -75,6 +82,7 @@ calc_n2_sum <- function(.data, .X) {
 
 #' Calculate d matrix
 #' @keywords internal
+#' @noRd
 calc_d <- function(.data){
   suppressWarnings(
     dmat <- sf::st_distance(sf::st_centroid(.data))
@@ -87,12 +95,14 @@ calc_d <- function(.data){
 
 #' Calculate c matrix
 #' @keywords internal
+#' @noRd
 calc_c <- function(.data){
   exp(-1 * calc_d(.data))
 }
 
 #' Calculate Pgg matrix
 #' @keywords internal
+#' @noRd
 calc_pgg <- function(.data, .g){
   .c <- calc_c(.data)
   .N <- length(.g)
@@ -103,6 +113,7 @@ calc_pgg <- function(.data, .g){
 
 #' Calculate k matrix
 #' @keywords internal
+#' @noRd
 calc_k <- function(.data, .total){
   .d <- calc_d(.data)
   .N <- nrow(.data)
@@ -114,6 +125,7 @@ calc_k <- function(.data, .total){
 
 #' Weighted Centroid
 #' @keywords internal
+#' @noRd
 calc_weighted_centroid<- function(.data, .wt) {
   suppressWarnings(
     .coords <- sf::st_coordinates(sf::st_centroid(.data))
@@ -126,6 +138,7 @@ calc_weighted_centroid<- function(.data, .wt) {
 
 #' Distance to Point
 #' @keywords internal
+#' @noRd
 calc_dist_centroid<- function(.data) {
   .pt <- calc_weighted_centroid(.data)
 

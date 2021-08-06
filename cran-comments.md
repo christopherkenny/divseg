@@ -14,4 +14,6 @@
 
 ## Additional Submission Notes
 
-* Adds missing `/` to logo url in README. Thank you. I added the `/` to the wrong link in the last submission.
+* Adds single quotes to 'tidyselect' in description.
+* Removes .Rd files for internal functions.
+* Thank you!
