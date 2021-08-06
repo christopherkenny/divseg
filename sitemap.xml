@@ -4,40 +4,10 @@
     <loc>https://christopherkenny.github.io/divseg/index.html</loc>
   </url>
   <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/calc_area.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/calc_c.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/calc_d.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/calc_dist_centroid.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/calc_k.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/calc_n1_sum.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/calc_n2_sum.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/calc_pgg.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/calc_weighted_centroid.html</loc>
-  </url>
-  <url>
     <loc>https://christopherkenny.github.io/divseg/reference/de_county.html</loc>
   </url>
   <url>
     <loc>https://christopherkenny.github.io/divseg/reference/de_tract.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/drop_sf.html</loc>
   </url>
   <url>
     <loc>https://christopherkenny.github.io/divseg/reference/ds_abs_cent.html</loc>
@@ -112,16 +82,7 @@
     <loc>https://christopherkenny.github.io/divseg/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/plog.html</loc>
-  </url>
-  <url>
     <loc>https://christopherkenny.github.io/divseg/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/relocate_sf.html</loc>
-  </url>
-  <url>
-    <loc>https://christopherkenny.github.io/divseg/reference/rowwise_if.html</loc>
   </url>
   <url>
     <loc>https://christopherkenny.github.io/divseg/reference/tidyeval.html</loc>
