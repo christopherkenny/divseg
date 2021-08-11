@@ -4,7 +4,7 @@ Version: 0.0.4
 Date: 2021-08-06
 Authors@R: person("Christopher T.", "Kenny", email = "christopherkenny@fas.harvard.edu",
                   role = c("aut", "cre"), comment = c(ORCID = "0000-0002-9386-6860"))
-Description: Implements common measures of diversity and spatial segregation. This package has tools to compute the majority of measures are reviewed in Douglas and Massey (1988) <doi:10.2307/2579183>. Multiple common measures of within-geography diversity are implemented as well. All functions operate on data frames with a 'tidyselect' based workflow.
+Description: Implements common measures of diversity and spatial segregation. This package has tools to compute the majority of measures are reviewed in Massey and Denton (1988) <doi:10.2307/2579183>. Multiple common measures of within-geography diversity are implemented as well. All functions operate on data frames with a 'tidyselect' based workflow.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
