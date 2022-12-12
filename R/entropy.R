@@ -36,7 +36,7 @@ ds_entropy <- function(.data, .cols, .name, .comp = FALSE){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across())) %>%
+    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) %>%
     dplyr::ungroup()
 
   .T <- sum(sub$.total)

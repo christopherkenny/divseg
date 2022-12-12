@@ -36,7 +36,7 @@ ds_isolation <- function(.data, .cols, .name, .comp = FALSE) {
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across()),
+    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
                   .x = pick_n(1)) %>%
     dplyr::ungroup()
 

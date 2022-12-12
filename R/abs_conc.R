@@ -40,7 +40,7 @@ ds_abs_conc <- function(.data, .cols, .name){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across()),
+    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
                   .x = pick_n(1)) %>%
     dplyr::ungroup()
 
