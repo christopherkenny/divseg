@@ -51,8 +51,3 @@ use_mutate <- function(name = NULL, open = rlang::is_interactive()) {
 
   invisible(new_lines)
 }
-
-pick_n <- function(n) {
-  stopifnot(rlang::is_integerish(n, n = 1))
-  tibble::deframe(dplyr::across(all_of(n)))
-}
