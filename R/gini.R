@@ -62,6 +62,6 @@ ds_gini <- function(.data, .cols, .name, .comp = FALSE){
 #' @rdname ds_gini
 #' @param ... arguments to forward to ds_gini from gini
 #' @export
-gini <- function(..., .data = dplyr::cur_data_all()) {
+gini <- function(..., .data = dplyr::pick(everything())) {
   ds_gini(.data = .data, ...)
 }

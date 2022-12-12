@@ -7,7 +7,7 @@
 \usage{
 ds_reyni(.data, .cols, .name, q = 0)
 
-reyni(..., .data = dplyr::cur_data_all())
+reyni(..., .data = dplyr::pick(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

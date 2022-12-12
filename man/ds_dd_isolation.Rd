@@ -7,7 +7,7 @@
 \usage{
 ds_dd_isolation(.data, .cols, .name, .comp = FALSE)
 
-dd_isolation(..., .data = dplyr::cur_data_all())
+dd_isolation(..., .data = dplyr::pick(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}

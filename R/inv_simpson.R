@@ -27,7 +27,7 @@ ds_inv_simpson <- function(.data, .cols, .name){
   out <- .data %>% drop_sf() %>%
     dplyr::rowwise() %>%
     dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) %>%
-    dplyr::mutate(!!.name := 1/sum((dplyr::select(dplyr::cur_data(), !!.cols)/.data$.total)^2)) %>%
+    dplyr::mutate(!!.name := 1/sum((dplyr::select(dplyr::pick(everything()), !!.cols)/.data$.total)^2)) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {
@@ -40,6 +40,6 @@ ds_inv_simpson <- function(.data, .cols, .name){
 #' @rdname ds_inv_simpson
 #' @param ... arguments to forward to ds_inv_simpson from inv_simpson
 #' @export
-inv_simpson <- function(..., .data = dplyr::cur_data_all()) {
+inv_simpson <- function(..., .data = dplyr::pick(everything())) {
   ds_inv_simpson(.data = .data, ...)
 }

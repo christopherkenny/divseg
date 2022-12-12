@@ -59,6 +59,6 @@ ds_dissim <- function(.data, .cols, .name, .comp = FALSE){
 #' @rdname ds_dissim
 #' @param ... arguments to forward to ds_dissim from dissim
 #' @export
-dissim <- function(..., .data = dplyr::cur_data_all()) {
+dissim <- function(..., .data = dplyr::pick(everything())) {
   ds_dissim(.data = .data, ...)
 }

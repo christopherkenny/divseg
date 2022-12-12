@@ -7,7 +7,7 @@
 \usage{
 ds_rel_clust(.data, .cols, .name)
 
-rel_clust(..., .data = dplyr::cur_data_all())
+rel_clust(..., .data = dplyr::pick(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}

@@ -7,7 +7,7 @@
 \usage{
 ds_interaction(.data, .cols, .name, .comp = FALSE)
 
-interaction(..., .data = dplyr::cur_data_all())
+interaction(..., .data = dplyr::pick(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

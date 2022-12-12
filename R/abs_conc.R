@@ -71,6 +71,6 @@ ds_abs_conc <- function(.data, .cols, .name){
 #' @rdname ds_abs_conc
 #' @param ... arguments to forward to ds_abs_conc from abs_conc
 #' @export
-abs_conc <- function(..., .data = dplyr::cur_data_all()) {
+abs_conc <- function(..., .data = dplyr::pick(everything())) {
   ds_abs_conc(.data = .data, ...)
 }

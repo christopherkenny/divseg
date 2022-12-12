@@ -7,7 +7,7 @@
 \usage{
 ds_blau(.data, .cols, .name)
 
-blau(..., .data = dplyr::cur_data_all())
+blau(..., .data = dplyr::pick(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

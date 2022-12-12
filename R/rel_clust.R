@@ -67,6 +67,6 @@ ds_rel_clust <- function(.data, .cols, .name){
 #' @rdname ds_rel_clust
 #' @param ... arguments to forward to ds_rel_clust from rel_clust
 #' @export
-rel_clust <- function(..., .data = dplyr::cur_data_all()) {
+rel_clust <- function(..., .data = dplyr::pick(everything())) {
   ds_rel_clust(.data = .data, ...)
 }

@@ -29,7 +29,7 @@ ds_hhi <- function(.data, .cols, .name){
   out <- .data %>% drop_sf() %>%
     dplyr::rowwise() %>%
     dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) %>%
-    dplyr::mutate(!!.name := sum((dplyr::select(dplyr::cur_data(), !!.cols)/.data$.total)^2)) %>%
+    dplyr::mutate(!!.name := sum((dplyr::select(dplyr::pick(everything()), !!.cols)/.data$.total)^2)) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {
@@ -42,6 +42,6 @@ ds_hhi <- function(.data, .cols, .name){
 #' @rdname ds_hhi
 #' @param ... arguments to forward to ds_hhi from hhi
 #' @export
-hhi <- function(..., .data = dplyr::cur_data_all()) {
+hhi <- function(..., .data = dplyr::pick(everything())) {
   ds_hhi(.data = .data, ...)
 }

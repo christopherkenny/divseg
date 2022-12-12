@@ -4,7 +4,7 @@ template_mutate <-
   "#' @rdname ``fn_name``
 #' @param ... arguments to forward to ``fn_name`` from ``fun``
 #' @export
-  ``fun`` <- function(..., .data = dplyr::cur_data_all()){
+  ``fun`` <- function(..., .data = dplyr::pick(everything())){
   ``fn_name``(.data = .data, ...)
   }"
 

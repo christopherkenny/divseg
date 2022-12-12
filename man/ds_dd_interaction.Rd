@@ -7,7 +7,7 @@
 \usage{
 ds_dd_interaction(.data, .cols, .name, .comp = FALSE)
 
-dd_interaction(..., .data = dplyr::cur_data_all())
+dd_interaction(..., .data = dplyr::pick(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}
