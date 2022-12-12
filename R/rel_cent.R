@@ -47,7 +47,7 @@ ds_rel_cent <- function(.data, .cols, .name){
   sub <- sub %>%
     dplyr::rowwise() %>%
     dplyr::mutate(.total = sum(dplyr::c_across()),
-                  .x = dplyr::first(dplyr::cur_data()),
+                  .x = pick_n(1),
                   .y = .data$.total - .data$.x) %>%
     dplyr::ungroup()
 

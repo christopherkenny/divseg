@@ -45,7 +45,7 @@ ds_dissim <- function(.data, .cols, .name, .comp = FALSE){
 
   out <- sub %>%
     rowwise_if(.comp) %>%
-    dplyr::mutate(!!.name := 0.5 * sum(.data$.total * abs(dplyr::first(dplyr::cur_data())/.data$.total - .P))
+    dplyr::mutate(!!.name := 0.5 * sum(.data$.total * abs(pick_n(1)/.data$.total - .P))
                   /(.T * .P * (1 - .P)) ) %>%
     dplyr::pull(!!.name)
 

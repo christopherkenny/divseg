@@ -41,7 +41,7 @@ ds_delta <- function(.data, .cols, .name, .comp = FALSE){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.x = dplyr::first(dplyr::cur_data())) %>%
+    dplyr::mutate(.x = pick_n(1)) %>%
     dplyr::ungroup()
 
   sub$.a <- calc_area(.data)

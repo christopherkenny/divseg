@@ -46,7 +46,7 @@ ds_atkinson <- function(.data, .cols, .name, b = 0.5) {
   .P <- sum(dplyr::first(sub)) / .T
 
   out <- sub %>%
-    dplyr::mutate(.p = dplyr::first(dplyr::cur_data()) / .data$.total) %>%
+    dplyr::mutate(.p = pick_n(1) / .data$.total) %>%
     dplyr::mutate(!!.name := 1 - (.P / (1 - .P)) *
                     abs((1 / (.P * .T)) *
                           sum((1 - .data$.p)^(1 - b) * .data$.p^b * .data$.total)

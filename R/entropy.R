@@ -44,7 +44,7 @@ ds_entropy <- function(.data, .cols, .name, .comp = FALSE){
   .E <- .P * plog (1/.P) + (1 - .P) * plog (1/(1 - .P))
 
   out <- sub %>%
-    dplyr::mutate(.p = dplyr::first(dplyr::cur_data())/.data$.total,
+    dplyr::mutate(.p = pick_n(1)/.data$.total,
                   .e =  .data$.p * plog (1/.data$.p) + (1 - .data$.p) * plog (1/(1 - .data$.p))) %>%
     rowwise_if(.comp) %>%
     dplyr::mutate(!!.name := sum(.data$.total * (.E * .data$.e))/(.E * .T) ) %>%

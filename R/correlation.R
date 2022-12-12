@@ -36,7 +36,7 @@ ds_correlation <- function(.data, .cols, .name) {
   sub <- sub %>%
     dplyr::rowwise() %>%
     dplyr::mutate(.total = sum(dplyr::c_across()),
-                  .x = dplyr::first(dplyr::cur_data())) %>%
+                  .x = pick_n(1)) %>%
     dplyr::ungroup()
 
   .X <- sum(sub$.x)
