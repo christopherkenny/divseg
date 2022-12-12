@@ -41,7 +41,7 @@ ds_dissim <- function(.data, .cols, .name, .comp = FALSE){
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(dplyr::first(sub))/.T
+  .P <- sum(sub[[1]])/.T
 
   out <- sub %>%
     rowwise_if(.comp) %>%

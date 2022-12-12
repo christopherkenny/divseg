@@ -43,7 +43,7 @@ ds_atkinson <- function(.data, .cols, .name, b = 0.5) {
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(dplyr::first(sub)) / .T
+  .P <- sum(sub[[1]]) / .T
 
   out <- sub %>%
     dplyr::mutate(.p = pick_n(1) / .data$.total) %>%

@@ -41,7 +41,7 @@ ds_correlation <- function(.data, .cols, .name) {
 
   .X <- sum(sub$.x)
   .T <- sum(sub$.total)
-  .P <- sum(dplyr::first(sub)) / .T
+  .P <- sum(sub[[1]]) / .T
 
   out <- sub %>%
     dplyr::mutate(!!.name := (sum((.data$.x/.X)*(.data$.x/.data$.total)) - .P)/(1 - .P)) %>%

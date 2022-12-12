@@ -40,9 +40,9 @@ ds_gini <- function(.data, .cols, .name, .comp = FALSE){
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(dplyr::first(sub))/.T
+  .P <- sum(sub[[1]])/.T
 
-  pmat <- matrix(rep(dplyr::first(sub), nrow(sub)), ncol = nrow(sub))
+  pmat <- matrix(rep(sub[[1]], nrow(sub)), ncol = nrow(sub))
   pmat <- abs(pmat - t(pmat))
   tmat <- crossprod(t(sub$.total)/.T)
 

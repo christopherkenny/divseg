@@ -40,7 +40,7 @@ ds_entropy <- function(.data, .cols, .name, .comp = FALSE){
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(dplyr::first(sub))/.T
+  .P <- sum(sub[[1]])/.T
   .E <- .P * plog (1/.P) + (1 - .P) * plog (1/(1 - .P))
 
   out <- sub %>%
