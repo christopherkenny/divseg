@@ -7,7 +7,7 @@
 \usage{
 ds_abs_cent(.data, .cols, .name)
 
-abs_cent(..., .data = dplyr::pick(everything()))
+abs_cent(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}

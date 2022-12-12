@@ -75,6 +75,6 @@ ds_rel_cent <- function(.data, .cols, .name){
 #' @rdname ds_rel_cent
 #' @param ... arguments to forward to ds_rel_cent from rel_cent
 #' @export
-rel_cent <- function(..., .data = dplyr::pick(everything())) {
+rel_cent <- function(..., .data = dplyr::across(everything())) {
   ds_rel_cent(.data = .data, ...)
 }

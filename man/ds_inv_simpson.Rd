@@ -7,7 +7,7 @@
 \usage{
 ds_inv_simpson(.data, .cols, .name)
 
-inv_simpson(..., .data = dplyr::pick(everything()))
+inv_simpson(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

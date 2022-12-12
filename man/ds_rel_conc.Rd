@@ -7,7 +7,7 @@
 \usage{
 ds_rel_conc(.data, .cols, .name)
 
-rel_conc(..., .data = dplyr::pick(everything()))
+rel_conc(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}

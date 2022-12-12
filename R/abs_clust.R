@@ -75,6 +75,6 @@ ds_abs_clust <- function(.data, .cols, .name){
 #' @rdname ds_abs_clust
 #' @param ... arguments to forward to ds_abs_clust from abs_clust
 #' @export
-abs_clust <- function(..., .data = dplyr::pick(everything())) {
+abs_clust <- function(..., .data = dplyr::across(everything())) {
   ds_abs_clust(.data = .data, ...)
 }

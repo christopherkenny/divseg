@@ -7,7 +7,7 @@
 \usage{
 ds_abs_clust(.data, .cols, .name)
 
-abs_clust(..., .data = dplyr::pick(everything()))
+abs_clust(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}

@@ -64,6 +64,6 @@ ds_delta <- function(.data, .cols, .name, .comp = FALSE){
 #' @rdname ds_delta
 #' @param ... arguments to forward to ds_delta from delta
 #' @export
-delta <- function(..., .data = dplyr::pick(everything())) {
+delta <- function(..., .data = dplyr::across(everything())) {
   ds_delta(.data = .data, ...)
 }

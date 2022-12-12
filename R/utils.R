@@ -4,7 +4,7 @@ template_mutate <-
   "#' @rdname ``fn_name``
 #' @param ... arguments to forward to ``fn_name`` from ``fun``
 #' @export
-  ``fun`` <- function(..., .data = dplyr::pick(everything())){
+  ``fun`` <- function(..., .data = dplyr::across(everything())){
   ``fn_name``(.data = .data, ...)
   }"
 
@@ -54,5 +54,5 @@ use_mutate <- function(name = NULL, open = rlang::is_interactive()) {
 
 pick_n <- function(n) {
   stopifnot(rlang::is_integerish(n, n = 1))
-  tibble::deframe(dplyr::pick(all_of(n)))
+  tibble::deframe(dplyr::across(all_of(n)))
 }

@@ -7,7 +7,7 @@
 \usage{
 ds_gini(.data, .cols, .name, .comp = FALSE)
 
-gini(..., .data = dplyr::pick(everything()))
+gini(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

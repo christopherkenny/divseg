@@ -71,6 +71,6 @@ ds_dd_interaction <- function(.data, .cols, .name, .comp = FALSE){
 #' @rdname ds_dd_interaction
 #' @param ... arguments to forward to ds_dd_interaction from dd_interaction
 #' @export
-dd_interaction <- function(..., .data = dplyr::pick(everything())) {
+dd_interaction <- function(..., .data = dplyr::across(everything())) {
   ds_dd_interaction(.data = .data, ...)
 }

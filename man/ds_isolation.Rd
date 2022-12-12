@@ -7,7 +7,7 @@
 \usage{
 ds_isolation(.data, .cols, .name, .comp = FALSE)
 
-isolation(..., .data = dplyr::pick(everything()))
+isolation(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

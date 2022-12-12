@@ -77,6 +77,6 @@ ds_rel_conc <- function(.data, .cols, .name) {
 #' @rdname ds_rel_conc
 #' @param ... arguments to forward to ds_rel_conc from rel_conc
 #' @export
-rel_conc <- function(..., .data = dplyr::pick(everything())) {
+rel_conc <- function(..., .data = dplyr::across(everything())) {
   ds_rel_conc(.data = .data, ...)
 }

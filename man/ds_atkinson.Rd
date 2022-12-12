@@ -7,7 +7,7 @@
 \usage{
 ds_atkinson(.data, .cols, .name, b = 0.5)
 
-atkinson(..., .data = dplyr::pick(everything()))
+atkinson(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

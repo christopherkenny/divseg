@@ -59,6 +59,6 @@ ds_isolation <- function(.data, .cols, .name, .comp = FALSE) {
 #' @rdname ds_isolation
 #' @param ... arguments to forward to ds_isolation from isolation
 #' @export
-isolation <- function(..., .data = dplyr::pick(everything())) {
+isolation <- function(..., .data = dplyr::across(everything())) {
   ds_isolation(.data = .data, ...)
 }

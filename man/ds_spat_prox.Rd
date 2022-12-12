@@ -7,7 +7,7 @@
 \usage{
 ds_spat_prox(.data, .cols, .name)
 
-spat_prox(..., .data = dplyr::pick(everything()))
+spat_prox(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}

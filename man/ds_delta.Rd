@@ -7,7 +7,7 @@
 \usage{
 ds_delta(.data, .cols, .name, .comp = FALSE)
 
-delta(..., .data = dplyr::pick(everything()))
+delta(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}

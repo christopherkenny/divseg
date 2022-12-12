@@ -28,8 +28,8 @@ ds_shannon <- function(.data, .cols, .name){
     drop_sf() %>%
     dplyr::rowwise() %>%
     dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) %>%
-    dplyr::mutate(!!.name := -1 * sum( (dplyr::select(dplyr::pick(everything()), !!.cols)/.data$.total) *
-                                           log((dplyr::select(dplyr::pick(everything()), !!.cols)/.data$.total))) ) %>%
+    dplyr::mutate(!!.name := -1 * sum( (dplyr::select(dplyr::across(everything()), !!.cols)/.data$.total) *
+                                           log((dplyr::select(dplyr::across(everything()), !!.cols)/.data$.total))) ) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {
@@ -42,6 +42,6 @@ ds_shannon <- function(.data, .cols, .name){
 #' @rdname ds_shannon
 #' @param ... arguments to forward to ds_shannon from shannon
 #' @export
-shannon <- function(..., .data = dplyr::pick(everything())) {
+shannon <- function(..., .data = dplyr::across(everything())) {
   ds_shannon(.data = .data, ...)
 }

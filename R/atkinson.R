@@ -65,6 +65,6 @@ ds_atkinson <- function(.data, .cols, .name, b = 0.5) {
 #' @rdname ds_atkinson
 #' @param ... arguments to forward to ds_atkinson from atkinson
 #' @export
-atkinson <- function(..., .data = dplyr::pick(everything())) {
+atkinson <- function(..., .data = dplyr::across(everything())) {
   ds_atkinson(.data = .data, ...)
 }

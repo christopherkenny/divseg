@@ -7,7 +7,7 @@
 \usage{
 ds_shannon(.data, .cols, .name)
 
-shannon(..., .data = dplyr::pick(everything()))
+shannon(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

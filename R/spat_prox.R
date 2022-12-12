@@ -70,6 +70,6 @@ ds_spat_prox <- function(.data, .cols, .name){
 #' @rdname ds_spat_prox
 #' @param ... arguments to forward to ds_spat_prox from spat_prox
 #' @export
-spat_prox <- function(..., .data = dplyr::pick(everything())) {
+spat_prox <- function(..., .data = dplyr::across(everything())) {
   ds_spat_prox(.data = .data, ...)
 }
