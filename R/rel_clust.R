@@ -42,8 +42,8 @@ ds_rel_clust <- function(.data, .cols, .name){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across()),
-                  .x = dplyr::first(dplyr::cur_data()),
+    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
+                  .x = pick_n(1),
                   .y = .data$.total - .data$.x) %>%
     dplyr::ungroup()
 
@@ -67,6 +67,6 @@ ds_rel_clust <- function(.data, .cols, .name){
 #' @rdname ds_rel_clust
 #' @param ... arguments to forward to ds_rel_clust from rel_clust
 #' @export
-rel_clust <- function(..., .data = dplyr::cur_data_all()) {
+rel_clust <- function(..., .data = dplyr::across(everything())) {
   ds_rel_clust(.data = .data, ...)
 }

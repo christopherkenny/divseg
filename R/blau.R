@@ -28,7 +28,7 @@ ds_blau <- function(.data, .cols, .name){
     drop_sf() %>%
     dplyr::rowwise() %>%
     dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) %>%
-    dplyr::mutate(!!.name := 1 - sum((dplyr::select(dplyr::cur_data(), !!.cols)/.data$.total)^2)) %>%
+    dplyr::mutate(!!.name := 1 - sum((dplyr::select(dplyr::across(everything()), !!.cols)/.data$.total)^2)) %>%
     dplyr::pull(!!.name)
 
   if (ret_t) {
@@ -41,6 +41,6 @@ ds_blau <- function(.data, .cols, .name){
 #' @rdname ds_blau
 #' @param ... arguments to forward to ds_blau from blau
 #' @export
-blau <- function(..., .data = dplyr::cur_data_all()) {
+blau <- function(..., .data = dplyr::across(everything())) {
   ds_blau(.data = .data, ...)
 }

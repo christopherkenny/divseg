@@ -42,8 +42,8 @@ ds_spat_prox <- function(.data, .cols, .name){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across()),
-                  .x = dplyr::first(dplyr::cur_data()),
+    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
+                  .x = pick_n(1),
                   .y = .data$.total - .data$.x) %>%
     dplyr::ungroup()
 
@@ -70,6 +70,6 @@ ds_spat_prox <- function(.data, .cols, .name){
 #' @rdname ds_spat_prox
 #' @param ... arguments to forward to ds_spat_prox from spat_prox
 #' @export
-spat_prox <- function(..., .data = dplyr::cur_data_all()) {
+spat_prox <- function(..., .data = dplyr::across(everything())) {
   ds_spat_prox(.data = .data, ...)
 }

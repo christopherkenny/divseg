@@ -32,7 +32,7 @@ ds_reyni <- function(.data, .cols, .name, q = 0) {
     drop_sf() %>%
     dplyr::rowwise() %>%
     dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) %>%
-    dplyr::mutate(!!.name := (1 / (1 - q)) * log(sum((dplyr::select(dplyr::cur_data(), !!.cols)
+    dplyr::mutate(!!.name := (1 / (1 - q)) * log(sum((dplyr::select(dplyr::across(everything()), !!.cols)
                                                       / .data$.total)^q))) %>%
     dplyr::pull(!!.name)
 
@@ -48,6 +48,6 @@ ds_reyni <- function(.data, .cols, .name, q = 0) {
 #' @rdname ds_reyni
 #' @param ... arguments to forward to ds_reyni from reyni
 #' @export
-reyni <- function(..., .data = dplyr::cur_data_all()) {
+reyni <- function(..., .data = dplyr::across(everything())) {
   ds_reyni(.data = .data, ...)
 }

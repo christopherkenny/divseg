@@ -43,8 +43,8 @@ ds_dd_isolation <- function(.data, .cols, .name, .comp = FALSE){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across()),
-                  .x = dplyr::first(dplyr::cur_data()),
+    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
+                  .x = pick_n(1),
                   .y = .data$.total - .data$.x) %>%
     dplyr::ungroup()
 
@@ -71,6 +71,6 @@ ds_dd_isolation <- function(.data, .cols, .name, .comp = FALSE){
 #' @rdname ds_dd_isolation
 #' @param ... arguments to forward to ds_dd_isolation from dd_isolation
 #' @export
-dd_isolation <- function(..., .data = dplyr::cur_data_all()) {
+dd_isolation <- function(..., .data = dplyr::across(everything())) {
   ds_dd_isolation(.data = .data, ...)
 }

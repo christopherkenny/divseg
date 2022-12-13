@@ -36,13 +36,13 @@ ds_gini <- function(.data, .cols, .name, .comp = FALSE){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across())) %>%
+    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) %>%
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(dplyr::first(sub))/.T
+  .P <- sum(sub[[1]])/.T
 
-  pmat <- matrix(rep(dplyr::first(sub), nrow(sub)), ncol = nrow(sub))
+  pmat <- matrix(rep(sub[[1]], nrow(sub)), ncol = nrow(sub))
   pmat <- abs(pmat - t(pmat))
   tmat <- crossprod(t(sub$.total)/.T)
 
@@ -62,6 +62,6 @@ ds_gini <- function(.data, .cols, .name, .comp = FALSE){
 #' @rdname ds_gini
 #' @param ... arguments to forward to ds_gini from gini
 #' @export
-gini <- function(..., .data = dplyr::cur_data_all()) {
+gini <- function(..., .data = dplyr::across(everything())) {
   ds_gini(.data = .data, ...)
 }

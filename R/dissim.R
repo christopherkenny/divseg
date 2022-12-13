@@ -37,15 +37,15 @@ ds_dissim <- function(.data, .cols, .name, .comp = FALSE){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across())) %>%
+    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) %>%
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(dplyr::first(sub))/.T
+  .P <- sum(sub[[1]])/.T
 
   out <- sub %>%
     rowwise_if(.comp) %>%
-    dplyr::mutate(!!.name := 0.5 * sum(.data$.total * abs(dplyr::first(dplyr::cur_data())/.data$.total - .P))
+    dplyr::mutate(!!.name := 0.5 * sum(.data$.total * abs(pick_n(1)/.data$.total - .P))
                   /(.T * .P * (1 - .P)) ) %>%
     dplyr::pull(!!.name)
 
@@ -59,6 +59,6 @@ ds_dissim <- function(.data, .cols, .name, .comp = FALSE){
 #' @rdname ds_dissim
 #' @param ... arguments to forward to ds_dissim from dissim
 #' @export
-dissim <- function(..., .data = dplyr::cur_data_all()) {
+dissim <- function(..., .data = dplyr::across(everything())) {
   ds_dissim(.data = .data, ...)
 }

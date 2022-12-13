@@ -7,7 +7,7 @@
 \usage{
 ds_entropy(.data, .cols, .name, .comp = FALSE)
 
-entropy(..., .data = dplyr::cur_data_all())
+entropy(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

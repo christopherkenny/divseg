@@ -39,14 +39,14 @@ ds_atkinson <- function(.data, .cols, .name, b = 0.5) {
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across())) %>%
+    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) %>%
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(dplyr::first(sub)) / .T
+  .P <- sum(sub[[1]]) / .T
 
   out <- sub %>%
-    dplyr::mutate(.p = dplyr::first(dplyr::cur_data()) / .data$.total) %>%
+    dplyr::mutate(.p = pick_n(1) / .data$.total) %>%
     dplyr::mutate(!!.name := 1 - (.P / (1 - .P)) *
                     abs((1 / (.P * .T)) *
                           sum((1 - .data$.p)^(1 - b) * .data$.p^b * .data$.total)
@@ -65,6 +65,6 @@ ds_atkinson <- function(.data, .cols, .name, b = 0.5) {
 #' @rdname ds_atkinson
 #' @param ... arguments to forward to ds_atkinson from atkinson
 #' @export
-atkinson <- function(..., .data = dplyr::cur_data_all()) {
+atkinson <- function(..., .data = dplyr::across(everything())) {
   ds_atkinson(.data = .data, ...)
 }

@@ -7,7 +7,7 @@
 \usage{
 ds_dissim(.data, .cols, .name, .comp = FALSE)
 
-dissim(..., .data = dplyr::cur_data_all())
+dissim(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

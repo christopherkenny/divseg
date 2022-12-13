@@ -40,8 +40,8 @@ ds_rel_conc <- function(.data, .cols, .name) {
   sub <- sub %>%
     dplyr::rowwise() %>%
     dplyr::mutate(
-      .total = sum(dplyr::c_across()),
-      .x = dplyr::first(dplyr::cur_data()),
+      .total = sum(dplyr::c_across(everything())),
+      .x = pick_n(1),
       .y = .data$.total - .data$.x
     ) %>%
     dplyr::ungroup()
@@ -77,6 +77,6 @@ ds_rel_conc <- function(.data, .cols, .name) {
 #' @rdname ds_rel_conc
 #' @param ... arguments to forward to ds_rel_conc from rel_conc
 #' @export
-rel_conc <- function(..., .data = dplyr::cur_data_all()) {
+rel_conc <- function(..., .data = dplyr::across(everything())) {
   ds_rel_conc(.data = .data, ...)
 }

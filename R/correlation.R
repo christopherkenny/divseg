@@ -35,13 +35,13 @@ ds_correlation <- function(.data, .cols, .name) {
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across()),
-                  .x = dplyr::first(dplyr::cur_data())) %>%
+    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
+                  .x = pick_n(1)) %>%
     dplyr::ungroup()
 
   .X <- sum(sub$.x)
   .T <- sum(sub$.total)
-  .P <- sum(dplyr::first(sub)) / .T
+  .P <- sum(sub[[1]]) / .T
 
   out <- sub %>%
     dplyr::mutate(!!.name := (sum((.data$.x/.X)*(.data$.x/.data$.total)) - .P)/(1 - .P)) %>%
@@ -59,6 +59,6 @@ ds_correlation <- function(.data, .cols, .name) {
 #' @rdname ds_correlation
 #' @param ... arguments to forward to ds_correlation from correlation
 #' @export
-correlation <- function(..., .data = dplyr::cur_data_all()) {
+correlation <- function(..., .data = dplyr::across(everything())) {
   ds_correlation(.data = .data, ...)
 }

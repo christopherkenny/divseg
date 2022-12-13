@@ -9,11 +9,11 @@
 \usage{
 ds_hhi(.data, .cols, .name)
 
-hhi(..., .data = dplyr::cur_data_all())
+hhi(..., .data = dplyr::across(everything()))
 
 ds_simpson(.data, .cols, .name)
 
-simpson(..., .data = dplyr::cur_data_all())
+simpson(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

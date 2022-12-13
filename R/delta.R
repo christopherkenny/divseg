@@ -41,7 +41,7 @@ ds_delta <- function(.data, .cols, .name, .comp = FALSE){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.x = dplyr::first(dplyr::cur_data())) %>%
+    dplyr::mutate(.x = pick_n(1)) %>%
     dplyr::ungroup()
 
   sub$.a <- calc_area(.data)
@@ -64,6 +64,6 @@ ds_delta <- function(.data, .cols, .name, .comp = FALSE){
 #' @rdname ds_delta
 #' @param ... arguments to forward to ds_delta from delta
 #' @export
-delta <- function(..., .data = dplyr::cur_data_all()) {
+delta <- function(..., .data = dplyr::across(everything())) {
   ds_delta(.data = .data, ...)
 }

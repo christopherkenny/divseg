@@ -7,7 +7,7 @@
 \usage{
 ds_abs_conc(.data, .cols, .name)
 
-abs_conc(..., .data = dplyr::cur_data_all())
+abs_conc(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}

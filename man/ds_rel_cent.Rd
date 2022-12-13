@@ -7,7 +7,7 @@
 \usage{
 ds_rel_cent(.data, .cols, .name)
 
-rel_cent(..., .data = dplyr::cur_data_all())
+rel_cent(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble} with sf geometry}

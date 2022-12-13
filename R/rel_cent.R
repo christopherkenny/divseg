@@ -46,8 +46,8 @@ ds_rel_cent <- function(.data, .cols, .name){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across()),
-                  .x = dplyr::first(dplyr::cur_data()),
+    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
+                  .x = pick_n(1),
                   .y = .data$.total - .data$.x) %>%
     dplyr::ungroup()
 
@@ -75,6 +75,6 @@ ds_rel_cent <- function(.data, .cols, .name){
 #' @rdname ds_rel_cent
 #' @param ... arguments to forward to ds_rel_cent from rel_cent
 #' @export
-rel_cent <- function(..., .data = dplyr::cur_data_all()) {
+rel_cent <- function(..., .data = dplyr::across(everything())) {
   ds_rel_cent(.data = .data, ...)
 }

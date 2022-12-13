@@ -36,15 +36,15 @@ ds_entropy <- function(.data, .cols, .name, .comp = FALSE){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across())) %>%
+    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) %>%
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(dplyr::first(sub))/.T
+  .P <- sum(sub[[1]])/.T
   .E <- .P * plog (1/.P) + (1 - .P) * plog (1/(1 - .P))
 
   out <- sub %>%
-    dplyr::mutate(.p = dplyr::first(dplyr::cur_data())/.data$.total,
+    dplyr::mutate(.p = pick_n(1)/.data$.total,
                   .e =  .data$.p * plog (1/.data$.p) + (1 - .data$.p) * plog (1/(1 - .data$.p))) %>%
     rowwise_if(.comp) %>%
     dplyr::mutate(!!.name := sum(.data$.total * (.E * .data$.e))/(.E * .T) ) %>%
@@ -60,6 +60,6 @@ ds_entropy <- function(.data, .cols, .name, .comp = FALSE){
 #' @rdname ds_entropy
 #' @param ... arguments to forward to ds_entropy from entropy
 #' @export
-entropy <- function(..., .data = dplyr::cur_data_all()) {
+entropy <- function(..., .data = dplyr::across(everything())) {
   ds_entropy(.data = .data, ...)
 }

@@ -36,8 +36,8 @@ ds_interaction <- function(.data, .cols, .name, .comp = FALSE) {
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across()),
-                  .x = dplyr::first(dplyr::cur_data()),
+    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
+                  .x = pick_n(1),
                   .y = .data$.total - .data$.x) %>%
     dplyr::ungroup()
 
@@ -58,6 +58,6 @@ ds_interaction <- function(.data, .cols, .name, .comp = FALSE) {
 #' @rdname ds_interaction
 #' @param ... arguments to forward to ds_interaction from interaction
 #' @export
-interaction <- function(..., .data = dplyr::cur_data_all()) {
+interaction <- function(..., .data = dplyr::across(everything())) {
   ds_interaction(.data = .data, ...)
 }

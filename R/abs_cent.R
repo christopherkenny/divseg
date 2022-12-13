@@ -46,7 +46,7 @@ ds_abs_cent <- function(.data, .cols, .name){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.x = dplyr::first(dplyr::cur_data())) %>%
+    dplyr::mutate(.x = pick_n(1)) %>%
     dplyr::ungroup()
 
   .X <- sum(sub[['.x']])
@@ -72,6 +72,6 @@ ds_abs_cent <- function(.data, .cols, .name){
 #' @rdname ds_abs_cent
 #' @param ... arguments to forward to ds_abs_cent from abs_cent
 #' @export
-abs_cent <- function(..., .data = dplyr::cur_data_all()) {
+abs_cent <- function(..., .data = dplyr::across(everything())) {
   ds_abs_cent(.data = .data, ...)
 }

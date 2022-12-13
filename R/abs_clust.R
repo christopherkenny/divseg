@@ -44,8 +44,8 @@ ds_abs_clust <- function(.data, .cols, .name){
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across()),
-                  .x = dplyr::first(dplyr::cur_data())) %>%
+    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
+                  .x = pick_n(1)) %>%
     dplyr::ungroup()
 
   .X <- sum(sub$.x)
@@ -75,6 +75,6 @@ ds_abs_clust <- function(.data, .cols, .name){
 #' @rdname ds_abs_clust
 #' @param ... arguments to forward to ds_abs_clust from abs_clust
 #' @export
-abs_clust <- function(..., .data = dplyr::cur_data_all()) {
+abs_clust <- function(..., .data = dplyr::across(everything())) {
   ds_abs_clust(.data = .data, ...)
 }

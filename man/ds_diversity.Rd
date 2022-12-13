@@ -9,11 +9,11 @@
 \usage{
 ds_diversity(.data, .cols, .name, q = 1)
 
-diversity(..., .data = dplyr::cur_data_all())
+diversity(..., .data = dplyr::across(everything()))
 
 ds_perplexity(.data, .cols, .name, q = 1)
 
-perplexity(..., .data = dplyr::cur_data_all())
+perplexity(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

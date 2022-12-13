@@ -7,7 +7,7 @@
 \usage{
 ds_correlation(.data, .cols, .name)
 
-correlation(..., .data = dplyr::cur_data_all())
+correlation(..., .data = dplyr::across(everything()))
 }
 \arguments{
 \item{.data}{\link[tibble:tibble-package]{tibble}}

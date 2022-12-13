@@ -36,8 +36,8 @@ ds_isolation <- function(.data, .cols, .name, .comp = FALSE) {
 
   sub <- sub %>%
     dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across()),
-                  .x = dplyr::first(dplyr::cur_data())) %>%
+    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
+                  .x = pick_n(1)) %>%
     dplyr::ungroup()
 
   .X <- sum(sub$.x)
@@ -59,6 +59,6 @@ ds_isolation <- function(.data, .cols, .name, .comp = FALSE) {
 #' @rdname ds_isolation
 #' @param ... arguments to forward to ds_isolation from isolation
 #' @export
-isolation <- function(..., .data = dplyr::cur_data_all()) {
+isolation <- function(..., .data = dplyr::across(everything())) {
   ds_isolation(.data = .data, ...)
 }
