@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,25 +40,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">divseg</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.4</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/christopherkenny/divseg/">
+  <a href="https://github.com/christopherkenny/divseg/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -73,139 +69,141 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="divseg-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#divseg-" class="anchor"></a>divseg <a href="https://christopherkenny.github.io/divseg/"><img src="reference/figures/logo.png" align="right" height="120"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="divseg-">divseg <a href="https://christopherkenny.github.io/divseg/"><img src="reference/figures/logo.png" align="right" height="120"></a>
+<a class="anchor" aria-label="anchor" href="#divseg-"></a>
 </h1></div>
 <!-- badges: start -->
-
 <p><code>divseg</code> implements common measures of diversity (within-geography) and segregation (across-geographies).</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <!---
 You can install the released version of divseg from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("divseg")
 ```
--->
-<p>You can install the released version of divseg from <a href="https://github.com/christopherkenny/divseg/">GitHub</a> with:</p>
+--><p>You can install the released version of divseg from <a href="https://github.com/christopherkenny/divseg/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"christopherkenny/divseg"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"christopherkenny/divseg"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <p>The basic workflow relies on a <code>tibble</code> where each row represents a geography and has columns that represent some form of population data.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/christopherkenny/divseg/">divseg</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'divseg'</span>
-<span class="co">#&gt; The following object is masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     interaction</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/christopherkenny/divseg/" class="external-link">divseg</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'divseg'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     interaction</span></span></code></pre></div>
 <p><code>divseg</code> comes with two example datasets. <code>de_county</code> contains 2010 Census data on the counties in Delaware. <code>de_tract</code> likewise has 2010 Census data on the tracts in Delaware.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">'de_county'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">'de_tract'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">'de_county'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">'de_tract'</span><span class="op">)</span></span></code></pre></div>
 <p>A pretty standard function call returns a vector, where the first entry is a <code>tibble</code> and the second is <code>tidyselect</code> language.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/ds_blau.html">ds_blau</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">de_county</span>, .cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'pop_'</span><span class="op">)</span><span class="op">)</span> 
-<span class="co">#&gt; [1] 0.5155228 0.5570435 0.4052769</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/ds_blau.html">ds_blau</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">de_county</span>, .cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">'pop_'</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; [1] 0.5155228 0.5570435 0.4052769</span></span></code></pre></div>
 <p>More importantly, if you specify an argument to <code>.name</code>, all functions are pipe-able.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">de_county</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/ds_blau.html">ds_blau</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'pop_'</span><span class="op">)</span>, .name <span class="op">=</span> <span class="st">'blau'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/ds_delta.html">ds_delta</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'pop_'</span><span class="op">)</span>, .name <span class="op">=</span> <span class="st">'delta'</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">blau</span>, <span class="va">delta</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 3 features and 22 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: -75.78866 ymin: 38.45101 xmax: -75.04894 ymax: 39.83901</span>
-<span class="co">#&gt; Geodetic CRS:  NAD83</span>
-<span class="co">#&gt; # A tibble: 3 x 23</span>
-<span class="co">#&gt;    blau delta GEOID NAME     pop pop_white pop_black pop_hisp pop_aian pop_asian</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 0.516 0.345 10001 Kent~ 162310    105891     37812     9346      916      3266</span>
-<span class="co">#&gt; 2 0.557 0.345 10003 New ~ 538479    331836    124426    46921      984     23132</span>
-<span class="co">#&gt; 3 0.405 0.345 10005 Suss~ 197145    149025     24544    16954      924      1910</span>
-<span class="co">#&gt; # ... with 13 more variables: pop_nhpi &lt;dbl&gt;, pop_other &lt;dbl&gt;, pop_two &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   vap &lt;dbl&gt;, vap_white &lt;dbl&gt;, vap_black &lt;dbl&gt;, vap_hisp &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   vap_aian &lt;dbl&gt;, vap_asian &lt;dbl&gt;, vap_nhpi &lt;dbl&gt;, vap_other &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   vap_two &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [°]&gt;</span></code></pre></div>
-<p>Each function has a partner that can go inside calls to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> by dropping the <code>ds_</code> prefix:</p>
+<code class="sourceCode R"><span><span class="va">de_county</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/ds_blau.html">ds_blau</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">'pop_'</span><span class="op">)</span>, .name <span class="op">=</span> <span class="st">'blau'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/ds_delta.html">ds_delta</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">'pop_'</span><span class="op">)</span>, .name <span class="op">=</span> <span class="st">'delta'</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">blau</span>, <span class="va">delta</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 3 features and 22 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -75.78866 ymin: 38.45101 xmax: -75.04894 ymax: 39.83901</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  NAD83</span></span>
+<span><span class="co">#&gt; # A tibble: 3 x 23</span></span>
+<span><span class="co">#&gt;    blau delta GEOID NAME     pop pop_white pop_black pop_hisp pop_aian pop_asian</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 0.516 0.345 10001 Kent~ 162310    105891     37812     9346      916      3266</span></span>
+<span><span class="co">#&gt; 2 0.557 0.345 10003 New ~ 538479    331836    124426    46921      984     23132</span></span>
+<span><span class="co">#&gt; 3 0.405 0.345 10005 Suss~ 197145    149025     24544    16954      924      1910</span></span>
+<span><span class="co">#&gt; # ... with 13 more variables: pop_nhpi &lt;dbl&gt;, pop_other &lt;dbl&gt;, pop_two &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   vap &lt;dbl&gt;, vap_white &lt;dbl&gt;, vap_black &lt;dbl&gt;, vap_hisp &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   vap_aian &lt;dbl&gt;, vap_asian &lt;dbl&gt;, vap_nhpi &lt;dbl&gt;, vap_other &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   vap_two &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [°]&gt;</span></span></code></pre></div>
+<p>Each function has a partner that can go inside calls to <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code> by dropping the <code>ds_</code> prefix:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">de_county</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>herf <span class="op">=</span> <span class="fu"><a href="reference/ds_hhi.html">hhi</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">'pop_'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">herf</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 3 features and 21 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: -75.78866 ymin: 38.45101 xmax: -75.04894 ymax: 39.83901</span>
-<span class="co">#&gt; Geodetic CRS:  NAD83</span>
-<span class="co">#&gt; # A tibble: 3 x 22</span>
-<span class="co">#&gt;    herf GEOID NAME           pop pop_white pop_black pop_hisp pop_aian pop_asian</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 0.484 10001 Kent Count~ 162310    105891     37812     9346      916      3266</span>
-<span class="co">#&gt; 2 0.443 10003 New Castle~ 538479    331836    124426    46921      984     23132</span>
-<span class="co">#&gt; 3 0.595 10005 Sussex Cou~ 197145    149025     24544    16954      924      1910</span>
-<span class="co">#&gt; # ... with 13 more variables: pop_nhpi &lt;dbl&gt;, pop_other &lt;dbl&gt;, pop_two &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   vap &lt;dbl&gt;, vap_white &lt;dbl&gt;, vap_black &lt;dbl&gt;, vap_hisp &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   vap_aian &lt;dbl&gt;, vap_asian &lt;dbl&gt;, vap_nhpi &lt;dbl&gt;, vap_other &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   vap_two &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [°]&gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">de_county</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>herf <span class="op">=</span> <span class="fu"><a href="reference/ds_hhi.html">hhi</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">'pop_'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">herf</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 3 features and 21 fields</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -75.78866 ymin: 38.45101 xmax: -75.04894 ymax: 39.83901</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  NAD83</span></span>
+<span><span class="co">#&gt; # A tibble: 3 x 22</span></span>
+<span><span class="co">#&gt;    herf GEOID NAME           pop pop_white pop_black pop_hisp pop_aian pop_asian</span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 0.484 10001 Kent Count~ 162310    105891     37812     9346      916      3266</span></span>
+<span><span class="co">#&gt; 2 0.443 10003 New Castle~ 538479    331836    124426    46921      984     23132</span></span>
+<span><span class="co">#&gt; 3 0.595 10005 Sussex Cou~ 197145    149025     24544    16954      924      1910</span></span>
+<span><span class="co">#&gt; # ... with 13 more variables: pop_nhpi &lt;dbl&gt;, pop_other &lt;dbl&gt;, pop_two &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   vap &lt;dbl&gt;, vap_white &lt;dbl&gt;, vap_black &lt;dbl&gt;, vap_hisp &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   vap_aian &lt;dbl&gt;, vap_asian &lt;dbl&gt;, vap_nhpi &lt;dbl&gt;, vap_other &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   vap_two &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [°]&gt;</span></span></code></pre></div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=divseg">https://​cloud.r-project.org/​package=divseg</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/christopherkenny/divseg/">https://​github.com/​christopherkenny/​divseg/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/christopherkenny/divseg/issues">https://​github.com/​christopherkenny/​divseg/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="citation">
-<h2>Citation</h2>
-<ul class="list-unstyled">
-<li><a href="authors.html">Citing divseg</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Christopher T. Kenny <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9386-6860" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="https://cloud.r-project.org/package=divseg" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/christopherkenny/divseg/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/christopherkenny/divseg/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/christopherkenny/divseg/actions"><img src="https://github.com/christopherkenny/divseg/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing divseg</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Christopher T. Kenny <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-9386-6860" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/christopherkenny/divseg/actions" class="external-link"><img src="https://github.com/christopherkenny/divseg/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Christopher T. Kenny.</p>
+  <p></p>
+<p>Developed by Christopher T. Kenny.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -213,6 +211,8 @@ install.packages("divseg")
 
   
 
+
+  
 
   </body>
 </html>

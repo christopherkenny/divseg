@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://christopherkenny.github.io/divseg/404.html</loc>
+  </url>
+  <url>
+    <loc>https://christopherkenny.github.io/divseg/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://christopherkenny.github.io/divseg/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://christopherkenny.github.io/divseg/authors.html</loc>
+  </url>
+  <url>
     <loc>https://christopherkenny.github.io/divseg/index.html</loc>
   </url>
   <url>
@@ -77,6 +89,9 @@
   </url>
   <url>
     <loc>https://christopherkenny.github.io/divseg/reference/ds_spat_prox.html</loc>
+  </url>
+  <url>
+    <loc>https://christopherkenny.github.io/divseg/reference/index.html</loc>
   </url>
   <url>
     <loc>https://christopherkenny.github.io/divseg/reference/pipe.html</loc>
