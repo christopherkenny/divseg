@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# divseg <a href='https://christopherkenny.github.io/divseg/'><img src='man/figures/logo.png' align="right" height="120" /></a>
+# divseg <a href='https://christophertkenny.com/divseg/'><img src='man/figures/logo.png' align="right" height="120" /></a>
 
 <!-- badges: start -->
 

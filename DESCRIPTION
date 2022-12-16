@@ -9,15 +9,15 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.2
 BugReports: https://github.com/christopherkenny/divseg/issues
-URL: https://github.com/christopherkenny/divseg/, https://christopherkenny.github.io/divseg/
+URL: https://github.com/christopherkenny/divseg/, https://christophertkenny.com/divseg/
 Suggests: 
     roxygen2,
     testthat (>= 3.0.0)
 Imports: 
-    sf  (>= 1.0.0),
-    rlang (>= 0.1.2),
+    sf (>= 1.0.0),
+    rlang (>= 0.4.11),
     dplyr,
     magrittr,
     tidyselect,

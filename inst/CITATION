@@ -3,7 +3,7 @@ citHeader("To cite divseg in publications use:")
 citEntry(entry = "misc",
 	 title = "{divseg}: Compute Diversity and Segregation Indices",
 	 author = personList(as.person("Christopher T. Kenny")),
-	 url = "https://christopherkenny.github.io/ppmf/",
+	 url = "https://christophertkenny.com/ppmf/",
 	 textVersion = paste(" Christopher T. Kenny (2021).",
 	 	             "divseg: Compute Diversity and Segregation Indices.",
 			     "URL https://christopherkenny.github.io/divseg.")
