@@ -2,7 +2,7 @@ pandoc: 2.7.3
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-12-16T21:47Z
+last_built: 2022-12-16T21:59Z
 urls:
   reference: https://christopherkenny.github.io/divseg/reference
   article: https://christopherkenny.github.io/divseg/articles
