@@ -1,10 +1,13 @@
-citHeader("To cite divseg in publications use:")
+citHeader("To cite `divseg` in publications use:")
 
-citEntry(entry = "misc",
-	 title = "{divseg}: Compute Diversity and Segregation Indices",
-	 author = personList(as.person("Christopher T. Kenny")),
-	 url = "https://christophertkenny.com/ppmf/",
-	 textVersion = paste(" Christopher T. Kenny (2021).",
-	 	             "divseg: Compute Diversity and Segregation Indices.",
-			     "URL https://christopherkenny.github.io/divseg.")
+bibentry(
+    bibtype = "Manual",
+    title = "{divseg}: Compute Diversity and Segregation Indices",
+    author = c(
+        person("Christopher T.", "Kenny", email = "christopherkenny@fas.harvard.edu", role = c("aut", "cre"))
+        ),
+    year = "2023",
+    note = "R package",
+    key = "divseg",
+    url = "https://christophertkenny.com/divseg/"
 )
