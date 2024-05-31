@@ -25,31 +25,33 @@ ds_correlation <- function(.data, .cols, .name) {
     ret_t <- TRUE
   }
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('.cols refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
-                  .x = pick_n(1)) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(
+      .total = sum(dplyr::c_across(everything())),
+      .x = pick_n(1)
+    ) |>
     dplyr::ungroup()
 
   .X <- sum(sub$.x)
   .T <- sum(sub$.total)
   .P <- sum(sub[[1]]) / .T
 
-  out <- sub %>%
-    dplyr::mutate(!!.name := (sum((.data$.x/.X)*(.data$.x/.data$.total)) - .P)/(1 - .P)) %>%
+  out <- sub |>
+    dplyr::mutate(!!.name := (sum((.data$.x / .X) * (.data$.x / .data$.total)) - .P) / (1 - .P)) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>%
-      dplyr::mutate(!!.name := out) %>%
+    .data |>
+      dplyr::mutate(!!.name := out) |>
       relocate_sf()
   } else {
     out

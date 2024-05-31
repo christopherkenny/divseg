@@ -29,21 +29,21 @@ ds_rel_conc <- function(.data, .cols, .name) {
     ret_t <- TRUE
   }
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('`.cols` refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
     dplyr::mutate(
       .total = sum(dplyr::c_across(everything())),
       .x = pick_n(1),
       .y = .data$.total - .data$.x
-    ) %>%
+    ) |>
     dplyr::ungroup()
 
   sub$.a <- calc_area(.data)
@@ -60,14 +60,14 @@ ds_rel_conc <- function(.data, .cols, .name) {
   .n1_sum <- calc_n1_sum(sub, .X)
   .n2_sum <- calc_n2_sum(sub, .X)
 
-  out <- sub %>%
+  out <- sub |>
     dplyr::mutate(!!.name := (sum(.data$.x * .data$.a / .X) / sum(.data$.y * .data$.a / .Y) - 1)
-                  / ((.n1_sum / .n2_sum) - 1)) %>%
+    / ((.n1_sum / .n2_sum) - 1)) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>%
-      dplyr::mutate(!!.name := out) %>%
+    .data |>
+      dplyr::mutate(!!.name := out) |>
       relocate_sf()
   } else {
     out

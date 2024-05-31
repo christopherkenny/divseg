@@ -13,11 +13,11 @@
 #' @md
 #' @concept evenness
 #' @examples
-#' data("de_county")
+#' data('de_county')
 #' ds_dissim(de_county, c(pop_white, starts_with('pop_')))
 #' ds_dissim(de_county, c(pop_white, starts_with('pop_')), .comp = TRUE)
 #' ds_dissim(de_county, starts_with('pop_'), 'dissim')
-ds_dissim <- function(.data, .cols, .name, .comp = FALSE){
+ds_dissim <- function(.data, .cols, .name, .comp = FALSE) {
   .cols <- rlang::enquo(.cols)
 
   if (missing(.name)) {
@@ -27,30 +27,32 @@ ds_dissim <- function(.data, .cols, .name, .comp = FALSE){
     ret_t <- TRUE
   }
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('.cols refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) |>
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(sub[[1]])/.T
+  .P <- sum(sub[[1]]) / .T
 
-  out <- sub %>%
-    rowwise_if(.comp) %>%
-    dplyr::mutate(!!.name := 0.5 * sum(.data$.total * abs(pick_n(1)/.data$.total - .P))
-                  /(.T * .P * (1 - .P)) ) %>%
+  out <- sub |>
+    rowwise_if(.comp) |>
+    dplyr::mutate(!!.name := 0.5 * sum(.data$.total * abs(pick_n(1) / .data$.total - .P))
+      / (.T * .P * (1 - .P))) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>% dplyr::mutate(!!.name := out) %>% relocate_sf()
+    .data |>
+      dplyr::mutate(!!.name := out) |>
+      relocate_sf()
   } else {
     out
   }

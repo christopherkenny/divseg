@@ -1,7 +1,6 @@
 Package: divseg
 Title: Calculate Diversity and Segregation Indices
-Version: 0.0.5
-Date: 2022-12-16
+Version: 0.1.0
 Authors@R: person("Christopher T.", "Kenny", email = "christopherkenny@fas.harvard.edu",
                   role = c("aut", "cre"), comment = c(ORCID = "0000-0002-9386-6860"))
 Description: Implements common measures of diversity and spatial segregation. This package has tools to compute the majority of measures are reviewed in Massey and Denton (1988) <doi:10.2307/2579183>. Multiple common measures of within-geography diversity are implemented as well. All functions operate on data frames with a 'tidyselect' based workflow.
@@ -9,7 +8,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.3.1
 BugReports: https://github.com/christopherkenny/divseg/issues
 URL: https://github.com/christopherkenny/divseg/, https://christophertkenny.com/divseg/
 Suggests: 
@@ -19,10 +18,9 @@ Imports:
     sf (>= 1.0.0),
     rlang (>= 0.4.11),
     dplyr,
-    magrittr,
     tidyselect,
     tibble,
     units
 Depends: 
-    R (>= 2.10)
+    R (>= 4.0.0)
 Config/testthat/edition: 3

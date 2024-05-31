@@ -1,4 +1,4 @@
-test_that("delta works", {
+test_that('delta works', {
   skip_on_os('solaris')
   skip_if_not(sf::sf_use_s2())
   .act <- ds_delta(de_county, starts_with('pop_'))
@@ -6,12 +6,12 @@ test_that("delta works", {
   expect_equal(.act, .exp, tolerance = 1e-6)
 })
 
-test_that("delta .name works", {
+test_that('delta .name works', {
   .act <- ds_delta(de_county, starts_with('pop_'), .name = 'special_name')
   expect_true('special_name' %in% names(.act))
 })
 
-test_that("delta .comp works", {
+test_that('delta .comp works', {
   skip_on_os('solaris')
   skip_if_not(sf::sf_use_s2())
   .act <- ds_delta(de_county, starts_with('pop_'), .comp = TRUE)

@@ -1,6 +1,6 @@
 library(testthat)
 library(divseg)
 
-data("de_county")
+data('de_county')
 
-test_check("divseg")
+test_check('divseg')

@@ -12,11 +12,10 @@
 #' @md
 #' @concept concentration
 #' @examples
-#' data("de_county")
+#' data('de_county')
 #' ds_abs_conc(de_county, c(pop_black, starts_with('pop_')))
 #' ds_abs_conc(de_county, c(pop_black, starts_with('pop_')), 'abs_conc')
-ds_abs_conc <- function(.data, .cols, .name){
-
+ds_abs_conc <- function(.data, .cols, .name) {
   if (!inherits(.data, 'sf')) {
     stop('`ds_abs_conc` requires `.data` to inherit sf for calculating areas.')
   }
@@ -30,18 +29,20 @@ ds_abs_conc <- function(.data, .cols, .name){
     ret_t <- TRUE
   }
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('`.cols` refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
-                  .x = pick_n(1)) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(
+      .total = sum(dplyr::c_across(everything())),
+      .x = pick_n(1)
+    ) |>
     dplyr::ungroup()
 
   sub$.a <- calc_area(.data)
@@ -50,19 +51,21 @@ ds_abs_conc <- function(.data, .cols, .name){
   .A <- sum(sub$.a)
   .T <- sum(sub$.total)
 
-  if (.X/.T > 0.5) {
+  if (.X / .T > 0.5) {
     warning('First column indicated in `.cols` is the majority group. Values may be unstable.')
   }
 
   .n1_sum <- calc_n1_sum(sub, .X)
   .n2_sum <- calc_n2_sum(sub, .X)
 
-  out <- sub %>%
-    dplyr::mutate(!!.name := 1 - ((sum(.data$.x * .data$.a/.X) - .n1_sum)/(.n2_sum - .n1_sum)) ) %>%
+  out <- sub |>
+    dplyr::mutate(!!.name := 1 - ((sum(.data$.x * .data$.a / .X) - .n1_sum) / (.n2_sum - .n1_sum))) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>% dplyr::mutate(!!.name := out) %>% relocate_sf()
+    .data |>
+      dplyr::mutate(!!.name := out) |>
+      relocate_sf()
   } else {
     out
   }

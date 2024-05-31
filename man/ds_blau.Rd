@@ -26,7 +26,7 @@ a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing
 Compute Blau's Index
 }
 \examples{
-data("de_county")
+data('de_county')
 ds_blau(de_county, starts_with('pop_'))
 ds_blau(de_county, starts_with('pop_'), 'blau')
 }

@@ -13,6 +13,6 @@ data("de_county")
 This data contains 2010 Census data for each of the three counties in DE.
 }
 \examples{
-data("de_county")
+data('de_county')
 }
 \concept{data}

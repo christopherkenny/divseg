@@ -28,17 +28,17 @@ ds_reyni <- function(.data, .cols, .name, q = 0) {
     ret_t <- TRUE
   }
 
-  out <- .data %>%
-    drop_sf() %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) %>%
+  out <- .data |>
+    drop_sf() |>
+    dplyr::rowwise() |>
+    dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) |>
     dplyr::mutate(!!.name := (1 / (1 - q)) * log(sum((dplyr::select(dplyr::across(everything()), !!.cols)
-                                                      / .data$.total)^q))) %>%
+    / .data$.total)^q))) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>%
-      dplyr::mutate(!!.name := out) %>%
+    .data |>
+      dplyr::mutate(!!.name := out) |>
       relocate_sf()
   } else {
     out

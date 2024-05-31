@@ -13,10 +13,10 @@
 #' @md
 #' @concept div
 #' @examples
-#' data("de_county")
+#' data('de_county')
 #' ds_hhi(de_county, starts_with('pop_'))
 #' ds_hhi(de_county, starts_with('pop_'), 'blau')
-ds_hhi <- function(.data, .cols, .name){
+ds_hhi <- function(.data, .cols, .name) {
   .cols <- rlang::enquo(.cols)
 
   if (missing(.name)) {
@@ -26,14 +26,17 @@ ds_hhi <- function(.data, .cols, .name){
     ret_t <- TRUE
   }
 
-  out <- .data %>% drop_sf() %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) %>%
-    dplyr::mutate(!!.name := sum((dplyr::select(dplyr::across(everything()), !!.cols)/.data$.total)^2)) %>%
+  out <- .data |>
+    drop_sf() |>
+    dplyr::rowwise() |>
+    dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) |>
+    dplyr::mutate(!!.name := sum((dplyr::select(dplyr::across(everything()), !!.cols) / .data$.total)^2)) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>% dplyr::mutate(!!.name := out) %>% relocate_sf()
+    .data |>
+      dplyr::mutate(!!.name := out) |>
+      relocate_sf()
   } else {
     out
   }

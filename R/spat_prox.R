@@ -12,11 +12,10 @@
 #' @md
 #' @concept clustering
 #' @examples
-#' data("de_county")
+#' data('de_county')
 #' ds_spat_prox(de_county, c(pop_black, starts_with('pop_')))
 #' ds_spat_prox(de_county, c(pop_black, starts_with('pop_')), 'spat_prox')
-ds_spat_prox <- function(.data, .cols, .name){
-
+ds_spat_prox <- function(.data, .cols, .name) {
   if (!inherits(.data, 'sf')) {
     stop('`ds_spat_prox` requires `.data` to inherit sf for calculating areas.')
   }
@@ -32,36 +31,40 @@ ds_spat_prox <- function(.data, .cols, .name){
 
   .data$.a <- calc_area(.data)
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('`.cols` refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
-                  .x = pick_n(1),
-                  .y = .data$.total - .data$.x) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(
+      .total = sum(dplyr::c_across(everything())),
+      .x = pick_n(1),
+      .y = .data$.total - .data$.x
+    ) |>
     dplyr::ungroup()
 
   .X <- sum(sub$.x)
   .Y <- sum(sub$.y)
   .T <- sum(sub$.total)
 
-  .pxx <- calc_pgg(.data, sub %>% dplyr::pull(.data$.x))
-  .pyy <- calc_pgg(.data, sub %>% dplyr::pull(.data$.y))
-  .ptt <- calc_pgg(.data, sub %>% dplyr::pull(.data$.total))
+  .pxx <- calc_pgg(.data, sub |> dplyr::pull(.data$.x))
+  .pyy <- calc_pgg(.data, sub |> dplyr::pull(.data$.y))
+  .ptt <- calc_pgg(.data, sub |> dplyr::pull(.data$.total))
 
 
-  out <- sub %>%
-    dplyr::mutate(!!.name := (.pxx + .pyy)/.ptt) %>%
+  out <- sub |>
+    dplyr::mutate(!!.name := (.pxx + .pyy) / .ptt) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>% dplyr::mutate(!!.name := out) %>% relocate_sf()
+    .data |>
+      dplyr::mutate(!!.name := out) |>
+      relocate_sf()
   } else {
     out
   }

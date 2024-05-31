@@ -26,30 +26,34 @@ ds_interaction <- function(.data, .cols, .name, .comp = FALSE) {
     ret_t <- TRUE
   }
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('.cols refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
-                  .x = pick_n(1),
-                  .y = .data$.total - .data$.x) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(
+      .total = sum(dplyr::c_across(everything())),
+      .x = pick_n(1),
+      .y = .data$.total - .data$.x
+    ) |>
     dplyr::ungroup()
 
   .X <- sum(sub$.x)
 
-  out <- sub %>%
-    rowwise_if(.comp) %>%
-    dplyr::mutate(!!.name := sum((.data$.x/.X)*(.data$.y/.data$.total))) %>%
+  out <- sub |>
+    rowwise_if(.comp) |>
+    dplyr::mutate(!!.name := sum((.data$.x / .X) * (.data$.y / .data$.total))) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>% dplyr::mutate(!!.name := out) %>% relocate_sf()
+    .data |>
+      dplyr::mutate(!!.name := out) |>
+      relocate_sf()
   } else {
     out
   }

@@ -8,7 +8,7 @@
 #' @concept data
 #'
 #' @examples
-#' data("de_county")
+#' data('de_county')
 NULL
 
 #' de_tract
@@ -21,5 +21,5 @@ NULL
 #' @concept data
 #'
 #' @examples
-#' data("de_tract")
+#' data('de_tract')
 NULL

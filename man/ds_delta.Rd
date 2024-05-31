@@ -29,7 +29,7 @@ a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing
 Compute Delta Index
 }
 \examples{
-data("de_county")
+data('de_county')
 ds_delta(de_county, c(pop_white, starts_with('pop_')))
 ds_delta(de_county, starts_with('pop_'), 'delta')
 }

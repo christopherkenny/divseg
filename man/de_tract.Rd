@@ -13,6 +13,6 @@ data("de_tract")
 This data contains 2010 Census data for each of the 218 tracts in DE.
 }
 \examples{
-data("de_tract")
+data('de_tract')
 }
 \concept{data}

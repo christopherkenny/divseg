@@ -13,11 +13,10 @@
 #' @md
 #' @concept clustering
 #' @examples
-#' data("de_county")
+#' data('de_county')
 #' ds_dd_isolation(de_county, c(pop_black, starts_with('pop_')))
 #' ds_dd_isolation(de_county, c(pop_black, starts_with('pop_')), 'dd_isolation')
-ds_dd_isolation <- function(.data, .cols, .name, .comp = FALSE){
-
+ds_dd_isolation <- function(.data, .cols, .name, .comp = FALSE) {
   if (!inherits(.data, 'sf')) {
     stop('`ds_dd_isolation` requires `.data` to inherit sf for calculating areas.')
   }
@@ -33,19 +32,21 @@ ds_dd_isolation <- function(.data, .cols, .name, .comp = FALSE){
 
   .data$.a <- calc_area(.data)
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('`.cols` refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
-                  .x = pick_n(1),
-                  .y = .data$.total - .data$.x) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(
+      .total = sum(dplyr::c_across(everything())),
+      .x = pick_n(1),
+      .y = .data$.total - .data$.x
+    ) |>
     dplyr::ungroup()
 
   .X <- sum(sub$.x)
@@ -54,15 +55,17 @@ ds_dd_isolation <- function(.data, .cols, .name, .comp = FALSE){
   .k <- calc_k(.data, sub[['.total']])
 
 
-  .sum_kxt <- sum((.k * sub[['.x']])/sub[['.total']], na.rm = TRUE)
+  .sum_kxt <- sum((.k * sub[['.x']]) / sub[['.total']], na.rm = TRUE)
 
-  out <- sub %>%
-    rowwise_if(.comp) %>%
-    dplyr::mutate(!!.name := sum((.data$.x/.X)*.sum_kxt)) %>%
+  out <- sub |>
+    rowwise_if(.comp) |>
+    dplyr::mutate(!!.name := sum((.data$.x / .X) * .sum_kxt)) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>% dplyr::mutate(!!.name := out) %>% relocate_sf()
+    .data |>
+      dplyr::mutate(!!.name := out) |>
+      relocate_sf()
   } else {
     out
   }

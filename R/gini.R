@@ -13,10 +13,10 @@
 #' @md
 #' @concept evenness
 #' @examples
-#' data("de_county")
+#' data('de_county')
 #' ds_gini(de_county, c(pop_white, starts_with('pop_')))
 #' ds_gini(de_county, starts_with('pop_'), 'gini')
-ds_gini <- function(.data, .cols, .name, .comp = FALSE){
+ds_gini <- function(.data, .cols, .name, .comp = FALSE) {
   .cols <- rlang::enquo(.cols)
 
   if (missing(.name)) {
@@ -26,34 +26,36 @@ ds_gini <- function(.data, .cols, .name, .comp = FALSE){
     ret_t <- TRUE
   }
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('.cols refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) |>
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(sub[[1]])/.T
+  .P <- sum(sub[[1]]) / .T
 
   pmat <- matrix(rep(sub[[1]], nrow(sub)), ncol = nrow(sub))
   pmat <- abs(pmat - t(pmat))
-  tmat <- crossprod(t(sub$.total)/.T)
+  tmat <- crossprod(t(sub$.total) / .T)
 
-  out <- sub %>%
-    dplyr::mutate(.tp = rowSums(tmat*pmat)) %>%
-    rowwise_if(.comp) %>%
-    dplyr::mutate(!!.name := 0.5 * sum(.data$.tp)/(.T^2 * .P * (1 - .P)) ) %>%
+  out <- sub |>
+    dplyr::mutate(.tp = rowSums(tmat * pmat)) |>
+    rowwise_if(.comp) |>
+    dplyr::mutate(!!.name := 0.5 * sum(.data$.tp) / (.T^2 * .P * (1 - .P))) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>% dplyr::mutate(!!.name := out) %>% relocate_sf()
+    .data |>
+      dplyr::mutate(!!.name := out) |>
+      relocate_sf()
   } else {
     out
   }

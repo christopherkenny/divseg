@@ -13,11 +13,10 @@
 #' @md
 #' @concept concentration
 #' @examples
-#' data("de_county")
+#' data('de_county')
 #' ds_delta(de_county, c(pop_white, starts_with('pop_')))
 #' ds_delta(de_county, starts_with('pop_'), 'delta')
-ds_delta <- function(.data, .cols, .name, .comp = FALSE){
-
+ds_delta <- function(.data, .cols, .name, .comp = FALSE) {
   if (!inherits(.data, 'sf')) {
     stop('`ds_delta` requires `.data` to inherit sf for calculating areas.')
   }
@@ -31,17 +30,17 @@ ds_delta <- function(.data, .cols, .name, .comp = FALSE){
     ret_t <- TRUE
   }
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('.cols refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.x = pick_n(1)) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(.x = pick_n(1)) |>
     dplyr::ungroup()
 
   sub$.a <- calc_area(.data)
@@ -49,13 +48,15 @@ ds_delta <- function(.data, .cols, .name, .comp = FALSE){
   .X <- sum(sub$.x)
   .A <- sum(sub$.a)
 
-  out <- sub %>%
-    rowwise_if(.comp) %>%
-    dplyr::mutate(!!.name := 0.5 * sum(abs(.data$.x/.X - .data$.a/.A)) ) %>%
+  out <- sub |>
+    rowwise_if(.comp) |>
+    dplyr::mutate(!!.name := 0.5 * sum(abs(.data$.x / .X - .data$.a / .A))) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>% dplyr::mutate(!!.name := out) %>% relocate_sf()
+    .data |>
+      dplyr::mutate(!!.name := out) |>
+      relocate_sf()
   } else {
     out
   }

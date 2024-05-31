@@ -27,7 +27,7 @@ a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing
 Compute Spatial Proximity
 }
 \examples{
-data("de_county")
+data('de_county')
 ds_spat_prox(de_county, c(pop_black, starts_with('pop_')))
 ds_spat_prox(de_county, c(pop_black, starts_with('pop_')), 'spat_prox')
 }

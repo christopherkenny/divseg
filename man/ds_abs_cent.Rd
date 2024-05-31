@@ -27,7 +27,7 @@ a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing
 Compute Absolute Centralization
 }
 \examples{
-data("de_county")
+data('de_county')
 ds_abs_cent(de_county, c(pop_white, starts_with('pop_')))
 ds_abs_cent(de_county, c(pop_white, starts_with('pop_')), 'abs_cent')
 }

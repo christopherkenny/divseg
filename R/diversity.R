@@ -27,17 +27,17 @@ ds_diversity <- function(.data, .cols, .name, q = 1) {
     ret_t <- TRUE
   }
 
-  out <- .data %>%
-    drop_sf() %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) %>%
-    dplyr::mutate(!!.name :=  sum((dplyr::select(dplyr::across(everything()), !!.cols)
-                                                      / .data$.total)^q)^(1 / (1 - q)) ) %>%
+  out <- .data |>
+    drop_sf() |>
+    dplyr::rowwise() |>
+    dplyr::mutate(.total = sum(dplyr::c_across(!!.cols))) |>
+    dplyr::mutate(!!.name := sum((dplyr::select(dplyr::across(everything()), !!.cols)
+    / .data$.total)^q)^(1 / (1 - q))) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>%
-      dplyr::mutate(!!.name := out) %>%
+    .data |>
+      dplyr::mutate(!!.name := out) |>
       relocate_sf()
   } else {
     out

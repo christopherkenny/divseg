@@ -13,10 +13,10 @@
 #' @md
 #' @concept evenness
 #' @examples
-#' data("de_county")
+#' data('de_county')
 #' ds_entropy(de_county, c(pop_white, starts_with('pop_')))
 #' ds_entropy(de_county, starts_with('pop_'), 'entropy')
-ds_entropy <- function(.data, .cols, .name, .comp = FALSE){
+ds_entropy <- function(.data, .cols, .name, .comp = FALSE) {
   .cols <- rlang::enquo(.cols)
 
   if (missing(.name)) {
@@ -26,32 +26,36 @@ ds_entropy <- function(.data, .cols, .name, .comp = FALSE){
     ret_t <- TRUE
   }
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('.cols refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) |>
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
-  .P <- sum(sub[[1]])/.T
-  .E <- .P * plog (1/.P) + (1 - .P) * plog (1/(1 - .P))
+  .P <- sum(sub[[1]]) / .T
+  .E <- .P * plog(1 / .P) + (1 - .P) * plog(1 / (1 - .P))
 
-  out <- sub %>%
-    dplyr::mutate(.p = pick_n(1)/.data$.total,
-                  .e =  .data$.p * plog (1/.data$.p) + (1 - .data$.p) * plog (1/(1 - .data$.p))) %>%
-    rowwise_if(.comp) %>%
-    dplyr::mutate(!!.name := sum(.data$.total * (.E * .data$.e))/(.E * .T) ) %>%
+  out <- sub |>
+    dplyr::mutate(
+      .p = pick_n(1) / .data$.total,
+      .e = .data$.p * plog(1 / .data$.p) + (1 - .data$.p) * plog(1 / (1 - .data$.p))
+    ) |>
+    rowwise_if(.comp) |>
+    dplyr::mutate(!!.name := sum(.data$.total * (.E - .data$.e)) / (.E * .T)) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>% dplyr::mutate(!!.name := out) %>% relocate_sf()
+    .data |>
+      dplyr::mutate(!!.name := out) |>
+      relocate_sf()
   } else {
     out
   }

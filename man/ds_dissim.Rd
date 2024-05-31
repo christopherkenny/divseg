@@ -29,7 +29,7 @@ a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing
 Compute Dissimilarity Index
 }
 \examples{
-data("de_county")
+data('de_county')
 ds_dissim(de_county, c(pop_white, starts_with('pop_')))
 ds_dissim(de_county, c(pop_white, starts_with('pop_')), .comp = TRUE)
 ds_dissim(de_county, starts_with('pop_'), 'dissim')

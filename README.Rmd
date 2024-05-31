@@ -7,9 +7,9 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  comment = '#>',
+  fig.path = 'man/figures/README-',
+  out.width = '100%'
 )
 ```
 
@@ -52,21 +52,21 @@ data('de_tract')
 
 A pretty standard function call returns a vector, where the first entry is a `tibble` and the second is `tidyselect` language.
 ```{r example}
-ds_blau(.data = de_county, .cols = starts_with('pop_')) 
+ds_blau(.data = de_county, .cols = starts_with('pop_'))
 ```
 
 More importantly, if you specify an argument to `.name`, all functions are pipe-able.
 ```{r pipe}
-de_county %>% 
-  ds_blau(starts_with('pop_'), .name = 'blau') %>% 
-  ds_delta(starts_with('pop_'), .name = 'delta') %>% 
+de_county %>%
+  ds_blau(starts_with('pop_'), .name = 'blau') %>%
+  ds_delta(starts_with('pop_'), .name = 'delta') %>%
   dplyr::relocate(blau, delta)
 ```
 
 Each function has a partner that can go inside calls to `dplyr::mutate()` by dropping the `ds_` prefix:
 ```{r}
-de_county %>% 
-  dplyr::mutate(herf = hhi(starts_with('pop_'))) %>% 
+de_county %>%
+  dplyr::mutate(herf = hhi(starts_with('pop_'))) %>%
   dplyr::relocate(herf)
 ```
 

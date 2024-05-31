@@ -27,7 +27,7 @@ a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing
 Compute Relative Clustering
 }
 \examples{
-data("de_county")
+data('de_county')
 ds_rel_clust(de_county, c(pop_black, starts_with('pop_')))
 ds_rel_clust(de_county, c(pop_black, starts_with('pop_')), 'rel_clust')
 }

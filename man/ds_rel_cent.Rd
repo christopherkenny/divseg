@@ -27,7 +27,7 @@ a \link[tibble:tibble-package]{tibble} or numeric vector if .name missing
 Compute Relative Centralization
 }
 \examples{
-data("de_county")
+data('de_county')
 ds_rel_cent(de_county, c(pop_white, starts_with('pop_')))
 ds_rel_cent(de_county, c(pop_white, starts_with('pop_')), 'rel_cent')
 }

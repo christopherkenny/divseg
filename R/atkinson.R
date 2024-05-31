@@ -29,33 +29,32 @@ ds_atkinson <- function(.data, .cols, .name, b = 0.5) {
     ret_t <- TRUE
   }
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('.cols refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(.total = sum(dplyr::c_across(everything()))) |>
     dplyr::ungroup()
 
   .T <- sum(sub$.total)
   .P <- sum(sub[[1]]) / .T
 
-  out <- sub %>%
-    dplyr::mutate(.p = pick_n(1) / .data$.total) %>%
+  out <- sub |>
+    dplyr::mutate(.p = pick_n(1) / .data$.total) |>
     dplyr::mutate(!!.name := 1 - (.P / (1 - .P)) *
-                    abs((1 / (.P * .T)) *
-                          sum((1 - .data$.p)^(1 - b) * .data$.p^b * .data$.total)
-                        )^(1 / (1 - b))) %>%
+      abs((1 / (.P * .T)) *
+        sum((1 - .data$.p)^(1 - b) * .data$.p^b * .data$.total))^(1 / (1 - b))) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>%
-      dplyr::mutate(!!.name := out) %>%
+    .data |>
+      dplyr::mutate(!!.name := out) |>
       relocate_sf()
   } else {
     out

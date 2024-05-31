@@ -12,11 +12,10 @@
 #' @md
 #' @concept centralization
 #' @examples
-#' data("de_county")
+#' data('de_county')
 #' ds_rel_cent(de_county, c(pop_white, starts_with('pop_')))
 #' ds_rel_cent(de_county, c(pop_white, starts_with('pop_')), 'rel_cent')
-ds_rel_cent <- function(.data, .cols, .name){
-
+ds_rel_cent <- function(.data, .cols, .name) {
   if (!inherits(.data, 'sf')) {
     stop('`ds_rel_cent` requires `.data` to inherit sf for calculating areas.')
   }
@@ -33,40 +32,46 @@ ds_rel_cent <- function(.data, .cols, .name){
   .a <- calc_area(.data)
   .A <- sum(.a)
   .data$.dist <- calc_dist_centroid(.data)
-  .data <- .data %>% dplyr::arrange(.data$.dist)
+  .data <- .data |> dplyr::arrange(.data$.dist)
 
 
-  sub <- .data %>%
-    drop_sf() %>%
+  sub <- .data |>
+    drop_sf() |>
     dplyr::select(!!.cols)
 
   if (ncol(sub) <= 1) {
     stop('`.cols` refers to a single column')
   }
 
-  sub <- sub %>%
-    dplyr::rowwise() %>%
-    dplyr::mutate(.total = sum(dplyr::c_across(everything())),
-                  .x = pick_n(1),
-                  .y = .data$.total - .data$.x) %>%
+  sub <- sub |>
+    dplyr::rowwise() |>
+    dplyr::mutate(
+      .total = sum(dplyr::c_across(everything())),
+      .x = pick_n(1),
+      .y = .data$.total - .data$.x
+    ) |>
     dplyr::ungroup()
 
   .X <- sum(sub[['.x']])
   .Y <- sum(sub[['.y']])
 
-  sub <- sub %>%
-    dplyr::mutate(.Xi = cumsum(.data$.x)/.X,
-                  .Yi = cumsum(.data$.y)/.Y,
-                  .Xi_min1 = dplyr::lag(.data$.Xi, default = 0),
-                  .Yi_min1 = dplyr::lag(.data$.Yi, default = 0))
+  sub <- sub |>
+    dplyr::mutate(
+      .Xi = cumsum(.data$.x) / .X,
+      .Yi = cumsum(.data$.y) / .Y,
+      .Xi_min1 = dplyr::lag(.data$.Xi, default = 0),
+      .Yi_min1 = dplyr::lag(.data$.Yi, default = 0)
+    )
 
-  out <- sub %>%
-    dplyr::mutate(!!.name := sum(.data$.Xi_min1*.data$.Yi) -
-                    sum(.data$.Xi*.data$.Yi_min1)) %>%
+  out <- sub |>
+    dplyr::mutate(!!.name := sum(.data$.Xi_min1 * .data$.Yi) -
+      sum(.data$.Xi * .data$.Yi_min1)) |>
     dplyr::pull(!!.name)
 
   if (ret_t) {
-    .data %>% dplyr::mutate(!!.name := out) %>% relocate_sf()
+    .data |>
+      dplyr::mutate(!!.name := out) |>
+      relocate_sf()
   } else {
     out
   }
