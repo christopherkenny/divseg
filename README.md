@@ -5,7 +5,13 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/christopherkenny/divseg/workflows/R-CMD-check/badge.svg)](https://github.com/christopherkenny/divseg/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/divseg)](https://CRAN.R-project.org/package=divseg)
+[![R-CMD-check](https://github.com/christopherkenny/divseg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/christopherkenny/divseg/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![divseg status
+badge](https://christopherkenny.r-universe.dev/badges/divseg)](https://christopherkenny.r-universe.dev/divseg)
 <!-- badges: end -->
 
 `divseg` implements common measures of diversity (within-geography) and
@@ -13,19 +19,18 @@ segregation (across-geographies).
 
 ## Installation
 
-<!---
-You can install the released version of divseg from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of divseg from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("divseg")
 ```
--->
 
 You can install the released version of divseg from
 [GitHub](https://github.com/christopherkenny/divseg/) with:
 
 ``` r
-remotes::install_github("christopherkenny/divseg")
+pak::pak('christopherkenny/divseg')
 ```
 
 ## Example
@@ -55,7 +60,7 @@ A pretty standard function call returns a vector, where the first entry
 is a `tibble` and the second is `tidyselect` language.
 
 ``` r
-ds_blau(.data = de_county, .cols = starts_with('pop_')) 
+ds_blau(.data = de_county, .cols = starts_with('pop_'))
 #> [1] 0.5155228 0.5570435 0.4052769
 ```
 
@@ -63,22 +68,22 @@ More importantly, if you specify an argument to `.name`, all functions
 are pipe-able.
 
 ``` r
-de_county %>% 
-  ds_blau(starts_with('pop_'), .name = 'blau') %>% 
-  ds_delta(starts_with('pop_'), .name = 'delta') %>% 
+de_county |>
+  ds_blau(starts_with('pop_'), .name = 'blau') |>
+  ds_delta(starts_with('pop_'), .name = 'delta') |>
   dplyr::relocate(blau, delta)
 #> Simple feature collection with 3 features and 22 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
 #> Bounding box:  xmin: -75.78866 ymin: 38.45101 xmax: -75.04894 ymax: 39.83901
 #> Geodetic CRS:  NAD83
-#> # A tibble: 3 x 23
+#> # A tibble: 3 × 23
 #>    blau delta GEOID NAME     pop pop_white pop_black pop_hisp pop_aian pop_asian
 #>   <dbl> <dbl> <chr> <chr>  <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
-#> 1 0.516 0.345 10001 Kent~ 162310    105891     37812     9346      916      3266
-#> 2 0.557 0.345 10003 New ~ 538479    331836    124426    46921      984     23132
-#> 3 0.405 0.345 10005 Suss~ 197145    149025     24544    16954      924      1910
-#> # ... with 13 more variables: pop_nhpi <dbl>, pop_other <dbl>, pop_two <dbl>,
+#> 1 0.516 0.345 10001 Kent… 162310    105891     37812     9346      916      3266
+#> 2 0.557 0.345 10003 New … 538479    331836    124426    46921      984     23132
+#> 3 0.405 0.345 10005 Suss… 197145    149025     24544    16954      924      1910
+#> # ℹ 13 more variables: pop_nhpi <dbl>, pop_other <dbl>, pop_two <dbl>,
 #> #   vap <dbl>, vap_white <dbl>, vap_black <dbl>, vap_hisp <dbl>,
 #> #   vap_aian <dbl>, vap_asian <dbl>, vap_nhpi <dbl>, vap_other <dbl>,
 #> #   vap_two <dbl>, geometry <MULTIPOLYGON [°]>
@@ -88,21 +93,21 @@ Each function has a partner that can go inside calls to
 `dplyr::mutate()` by dropping the `ds_` prefix:
 
 ``` r
-de_county %>% 
-  dplyr::mutate(herf = hhi(starts_with('pop_'))) %>% 
+de_county |>
+  dplyr::mutate(herf = hhi(starts_with('pop_'))) |>
   dplyr::relocate(herf)
 #> Simple feature collection with 3 features and 21 fields
 #> Geometry type: MULTIPOLYGON
 #> Dimension:     XY
 #> Bounding box:  xmin: -75.78866 ymin: 38.45101 xmax: -75.04894 ymax: 39.83901
 #> Geodetic CRS:  NAD83
-#> # A tibble: 3 x 22
+#> # A tibble: 3 × 22
 #>    herf GEOID NAME           pop pop_white pop_black pop_hisp pop_aian pop_asian
 #>   <dbl> <chr> <chr>        <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
-#> 1 0.484 10001 Kent Count~ 162310    105891     37812     9346      916      3266
-#> 2 0.443 10003 New Castle~ 538479    331836    124426    46921      984     23132
-#> 3 0.595 10005 Sussex Cou~ 197145    149025     24544    16954      924      1910
-#> # ... with 13 more variables: pop_nhpi <dbl>, pop_other <dbl>, pop_two <dbl>,
+#> 1 0.484 10001 Kent Count… 162310    105891     37812     9346      916      3266
+#> 2 0.443 10003 New Castle… 538479    331836    124426    46921      984     23132
+#> 3 0.595 10005 Sussex Cou… 197145    149025     24544    16954      924      1910
+#> # ℹ 13 more variables: pop_nhpi <dbl>, pop_other <dbl>, pop_two <dbl>,
 #> #   vap <dbl>, vap_white <dbl>, vap_black <dbl>, vap_hisp <dbl>,
 #> #   vap_aian <dbl>, vap_asian <dbl>, vap_nhpi <dbl>, vap_other <dbl>,
 #> #   vap_two <dbl>, geometry <MULTIPOLYGON [°]>

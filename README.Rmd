@@ -17,23 +17,29 @@ knitr::opts_chunk$set(
 
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/christopherkenny/divseg/workflows/R-CMD-check/badge.svg)](https://github.com/christopherkenny/divseg/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/divseg)](https://CRAN.R-project.org/package=divseg)
+[![R-CMD-check](https://github.com/christopherkenny/divseg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/christopherkenny/divseg/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![divseg status
+badge](https://christopherkenny.r-universe.dev/badges/divseg)](https://christopherkenny.r-universe.dev/divseg)
 <!-- badges: end -->
 
 `divseg` implements common measures of diversity (within-geography) and segregation (across-geographies).
 
 ## Installation
-<!---
+
 You can install the released version of divseg from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("divseg")
+
 ```
--->
 You can install the released version of divseg from [GitHub](https://github.com/christopherkenny/divseg/) with:
 
 ``` r
-remotes::install_github("christopherkenny/divseg")
+pak::pak('christopherkenny/divseg')
 ```
 
 ## Example
@@ -57,16 +63,16 @@ ds_blau(.data = de_county, .cols = starts_with('pop_'))
 
 More importantly, if you specify an argument to `.name`, all functions are pipe-able.
 ```{r pipe}
-de_county %>%
-  ds_blau(starts_with('pop_'), .name = 'blau') %>%
-  ds_delta(starts_with('pop_'), .name = 'delta') %>%
+de_county |>
+  ds_blau(starts_with('pop_'), .name = 'blau') |>
+  ds_delta(starts_with('pop_'), .name = 'delta') |>
   dplyr::relocate(blau, delta)
 ```
 
 Each function has a partner that can go inside calls to `dplyr::mutate()` by dropping the `ds_` prefix:
 ```{r}
-de_county %>%
-  dplyr::mutate(herf = hhi(starts_with('pop_'))) %>%
+de_county |>
+  dplyr::mutate(herf = hhi(starts_with('pop_'))) |>
   dplyr::relocate(herf)
 ```
 
