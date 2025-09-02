@@ -4,9 +4,9 @@ bibentry(
     bibtype = "Manual",
     title = "{divseg}: Compute Diversity and Segregation Indices",
     author = c(
-        person("Christopher T.", "Kenny", email = "christopherkenny@fas.harvard.edu", role = c("aut", "cre"))
+        person("Christopher T.", "Kenny", email = "ctkenny@proton.me", role = c("aut", "cre"))
         ),
-    year = "2023",
+    year = "2025",
     note = "R package",
     key = "divseg",
     url = "https://christophertkenny.com/divseg/"
