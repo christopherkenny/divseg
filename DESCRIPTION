@@ -8,7 +8,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 BugReports: https://github.com/christopherkenny/divseg/issues
 URL: https://github.com/christopherkenny/divseg/, https://christophertkenny.com/divseg/
 Suggests: 
