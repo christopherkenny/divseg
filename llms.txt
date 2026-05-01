@@ -1,0 +1,221 @@
+# divseg
+
+`divseg` implements common measures of diversity (within-geography) and
+segregation (across-geographies).
+
+## Installation
+
+You can install the released version of divseg from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+
+install.packages("divseg")
+```
+
+You can install the released version of divseg from
+[GitHub](https://github.com/christopherkenny/divseg/) with:
+
+``` r
+
+pak::pak('christopherkenny/divseg')
+```
+
+## Example
+
+The basic workflow relies on a `tibble` where each row represents a
+geography and has columns that represent some form of population data.
+
+``` r
+
+library(divseg)
+#> 
+#> Attaching package: 'divseg'
+#> The following object is masked from 'package:base':
+#> 
+#>     interaction
+```
+
+`divseg` comes with two example datasets. `de_county` contains 2010
+Census data on the counties in Delaware. `de_tract` likewise has 2010
+Census data on the tracts in Delaware.
+
+``` r
+
+data('de_county')
+data('de_tract')
+```
+
+A pretty standard function call returns a vector, where the first entry
+is a `tibble` and the second is `tidyselect` language.
+
+``` r
+
+ds_blau(.data = de_county, .cols = starts_with('pop_'))
+#> [1] 0.5155228 0.5570435 0.4052769
+```
+
+More importantly, if you specify an argument to `.name`, all functions
+are pipe-able.
+
+``` r
+
+de_county |>
+  ds_blau(starts_with('pop_'), .name = 'blau') |>
+  ds_delta(starts_with('pop_'), .name = 'delta') |>
+  dplyr::relocate(blau, delta)
+#> Simple feature collection with 3 features and 22 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: -75.78866 ymin: 38.45101 xmax: -75.04894 ymax: 39.83901
+#> Geodetic CRS:  NAD83
+#> # A tibble: 3 × 23
+#>    blau delta GEOID NAME     pop pop_white pop_black pop_hisp pop_aian pop_asian
+#>   <dbl> <dbl> <chr> <chr>  <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
+#> 1 0.516 0.345 10001 Kent… 162310    105891     37812     9346      916      3266
+#> 2 0.557 0.345 10003 New … 538479    331836    124426    46921      984     23132
+#> 3 0.405 0.345 10005 Suss… 197145    149025     24544    16954      924      1910
+#> # ℹ 13 more variables: pop_nhpi <dbl>, pop_other <dbl>, pop_two <dbl>,
+#> #   vap <dbl>, vap_white <dbl>, vap_black <dbl>, vap_hisp <dbl>,
+#> #   vap_aian <dbl>, vap_asian <dbl>, vap_nhpi <dbl>, vap_other <dbl>,
+#> #   vap_two <dbl>, geometry <MULTIPOLYGON [°]>
+```
+
+Each function has a partner that can go inside calls to
+[`dplyr::mutate()`](https://dplyr.tidyverse.org/reference/mutate.html)
+by dropping the `ds_` prefix:
+
+``` r
+
+de_county |>
+  dplyr::mutate(herf = hhi(starts_with('pop_'))) |>
+  dplyr::relocate(herf)
+#> Simple feature collection with 3 features and 21 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: -75.78866 ymin: 38.45101 xmax: -75.04894 ymax: 39.83901
+#> Geodetic CRS:  NAD83
+#> # A tibble: 3 × 22
+#>    herf GEOID NAME           pop pop_white pop_black pop_hisp pop_aian pop_asian
+#>   <dbl> <chr> <chr>        <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
+#> 1 0.484 10001 Kent Count… 162310    105891     37812     9346      916      3266
+#> 2 0.443 10003 New Castle… 538479    331836    124426    46921      984     23132
+#> 3 0.595 10005 Sussex Cou… 197145    149025     24544    16954      924      1910
+#> # ℹ 13 more variables: pop_nhpi <dbl>, pop_other <dbl>, pop_two <dbl>,
+#> #   vap <dbl>, vap_white <dbl>, vap_black <dbl>, vap_hisp <dbl>,
+#> #   vap_aian <dbl>, vap_asian <dbl>, vap_nhpi <dbl>, vap_other <dbl>,
+#> #   vap_two <dbl>, geometry <MULTIPOLYGON [°]>
+```
+
+# Package index
+
+## Estimating Diversity Indices
+
+Functions for estimating aspatial diversity indices
+
+- [`ds_blau()`](https://christopherkenny.github.io/divseg/reference/ds_blau.md)
+  [`blau()`](https://christopherkenny.github.io/divseg/reference/ds_blau.md)
+  : Compute Blau's Index
+- [`ds_diversity()`](https://christopherkenny.github.io/divseg/reference/ds_diversity.md)
+  [`diversity()`](https://christopherkenny.github.io/divseg/reference/ds_diversity.md)
+  [`ds_perplexity()`](https://christopherkenny.github.io/divseg/reference/ds_diversity.md)
+  [`perplexity()`](https://christopherkenny.github.io/divseg/reference/ds_diversity.md)
+  : Compute Diversity
+- [`ds_hhi()`](https://christopherkenny.github.io/divseg/reference/ds_hhi.md)
+  [`hhi()`](https://christopherkenny.github.io/divseg/reference/ds_hhi.md)
+  [`ds_simpson()`](https://christopherkenny.github.io/divseg/reference/ds_hhi.md)
+  [`simpson()`](https://christopherkenny.github.io/divseg/reference/ds_hhi.md)
+  : Compute Herfindahl-Hirshman Index
+- [`ds_inv_simpson()`](https://christopherkenny.github.io/divseg/reference/ds_inv_simpson.md)
+  [`inv_simpson()`](https://christopherkenny.github.io/divseg/reference/ds_inv_simpson.md)
+  : Compute Simpson Index
+- [`ds_reyni()`](https://christopherkenny.github.io/divseg/reference/ds_reyni.md)
+  [`reyni()`](https://christopherkenny.github.io/divseg/reference/ds_reyni.md)
+  : Compute Reyni Entropy
+- [`ds_shannon()`](https://christopherkenny.github.io/divseg/reference/ds_shannon.md)
+  [`shannon()`](https://christopherkenny.github.io/divseg/reference/ds_shannon.md)
+  : Compute Shannon Index
+
+## Evenness Segregation Indices
+
+Functions for estimating segregation indices of evenness
+
+- [`ds_atkinson()`](https://christopherkenny.github.io/divseg/reference/ds_atkinson.md)
+  [`atkinson()`](https://christopherkenny.github.io/divseg/reference/ds_atkinson.md)
+  : Compute Atkinson b Index
+- [`ds_dissim()`](https://christopherkenny.github.io/divseg/reference/ds_dissim.md)
+  [`dissim()`](https://christopherkenny.github.io/divseg/reference/ds_dissim.md)
+  : Compute Dissimilarity Index
+- [`ds_entropy()`](https://christopherkenny.github.io/divseg/reference/ds_entropy.md)
+  [`entropy()`](https://christopherkenny.github.io/divseg/reference/ds_entropy.md)
+  : Compute Entropy Index
+- [`ds_gini()`](https://christopherkenny.github.io/divseg/reference/ds_gini.md)
+  [`gini()`](https://christopherkenny.github.io/divseg/reference/ds_gini.md)
+  : Compute Gini Index
+
+## Exposure Segregation Indices
+
+Functions for estimating segregation indices of exposure
+
+- [`ds_correlation()`](https://christopherkenny.github.io/divseg/reference/ds_correlation.md)
+  [`correlation()`](https://christopherkenny.github.io/divseg/reference/ds_correlation.md)
+  : Compute Correlation Index
+- [`ds_interaction()`](https://christopherkenny.github.io/divseg/reference/ds_interaction.md)
+  [`interaction()`](https://christopherkenny.github.io/divseg/reference/ds_interaction.md)
+  : Compute Interaction Index
+- [`ds_isolation()`](https://christopherkenny.github.io/divseg/reference/ds_isolation.md)
+  [`isolation()`](https://christopherkenny.github.io/divseg/reference/ds_isolation.md)
+  : Compute Isolation Index
+
+## Concentration Segregation Indices
+
+Functions for estimating segregation indices of concentration
+
+- [`ds_abs_conc()`](https://christopherkenny.github.io/divseg/reference/ds_abs_conc.md)
+  [`abs_conc()`](https://christopherkenny.github.io/divseg/reference/ds_abs_conc.md)
+  : Compute Absolute Concentration
+- [`ds_delta()`](https://christopherkenny.github.io/divseg/reference/ds_delta.md)
+  [`delta()`](https://christopherkenny.github.io/divseg/reference/ds_delta.md)
+  : Compute Delta Index
+- [`ds_rel_conc()`](https://christopherkenny.github.io/divseg/reference/ds_rel_conc.md)
+  [`rel_conc()`](https://christopherkenny.github.io/divseg/reference/ds_rel_conc.md)
+  : Compute Relative Concentration
+
+## Centralization Segregation Indices
+
+Functions for estimating segregation indices of centralization
+
+- [`ds_abs_cent()`](https://christopherkenny.github.io/divseg/reference/ds_abs_cent.md)
+  [`abs_cent()`](https://christopherkenny.github.io/divseg/reference/ds_abs_cent.md)
+  : Compute Absolute Centralization
+- [`ds_rel_cent()`](https://christopherkenny.github.io/divseg/reference/ds_rel_cent.md)
+  [`rel_cent()`](https://christopherkenny.github.io/divseg/reference/ds_rel_cent.md)
+  : Compute Relative Centralization
+
+## Clustering Segregation Indices
+
+Functions for estimating segregation indices of clustering
+
+- [`ds_abs_clust()`](https://christopherkenny.github.io/divseg/reference/ds_abs_clust.md)
+  [`abs_clust()`](https://christopherkenny.github.io/divseg/reference/ds_abs_clust.md)
+  : Compute Absolute Clustering
+- [`ds_dd_interaction()`](https://christopherkenny.github.io/divseg/reference/ds_dd_interaction.md)
+  [`dd_interaction()`](https://christopherkenny.github.io/divseg/reference/ds_dd_interaction.md)
+  : Compute Distance Decay Interaction
+- [`ds_dd_isolation()`](https://christopherkenny.github.io/divseg/reference/ds_dd_isolation.md)
+  [`dd_isolation()`](https://christopherkenny.github.io/divseg/reference/ds_dd_isolation.md)
+  : Compute Distance Decay Isolation
+- [`ds_rel_clust()`](https://christopherkenny.github.io/divseg/reference/ds_rel_clust.md)
+  [`rel_clust()`](https://christopherkenny.github.io/divseg/reference/ds_rel_clust.md)
+  : Compute Relative Clustering
+- [`ds_spat_prox()`](https://christopherkenny.github.io/divseg/reference/ds_spat_prox.md)
+  [`spat_prox()`](https://christopherkenny.github.io/divseg/reference/ds_spat_prox.md)
+  : Compute Spatial Proximity
+
+## Included Example Data
+
+- [`de_county`](https://christopherkenny.github.io/divseg/reference/de_county.md)
+  : de_county
+- [`de_tract`](https://christopherkenny.github.io/divseg/reference/de_tract.md)
+  : de_tract
+

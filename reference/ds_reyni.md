@@ -1,0 +1,63 @@
+# Compute Reyni Entropy
+
+Compute Reyni Entropy
+
+## Usage
+
+``` r
+ds_reyni(.data, .cols, .name, q = 0)
+
+reyni(..., .data = dplyr::across(everything()))
+```
+
+## Arguments
+
+- .data:
+
+  [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+
+- .cols:
+
+  [`tidy-select`](https://tidyselect.r-lib.org/reference/language.html)
+  Columns to compute the measure with.
+
+- .name:
+
+  name for column with Reyni entropy. Leave missing to return a vector.
+
+- q:
+
+  exponent parameter. Default 0. Can not be 1.
+
+- ...:
+
+  arguments to forward to ds_reyni from reyni
+
+## Value
+
+a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+or numeric vector if .name missing
+
+## Examples
+
+``` r
+data('de_county')
+ds_reyni(de_county, starts_with('pop_'))
+#> [1] 2.079442 2.079442 2.079442
+ds_reyni(de_county, starts_with('pop_'), 'reyni')
+#> Simple feature collection with 3 features and 21 fields
+#> Geometry type: MULTIPOLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: -75.78866 ymin: 38.45101 xmax: -75.04894 ymax: 39.83901
+#> Geodetic CRS:  NAD83
+#> # A tibble: 3 × 22
+#>   GEOID NAME        pop pop_white pop_black pop_hisp pop_aian pop_asian pop_nhpi
+#>   <chr> <chr>     <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>    <dbl>
+#> 1 10001 Kent Co… 162310    105891     37812     9346      916      3266       74
+#> 2 10003 New Cas… 538479    331836    124426    46921      984     23132      102
+#> 3 10005 Sussex … 197145    149025     24544    16954      924      1910       62
+#> # ℹ 13 more variables: pop_other <dbl>, pop_two <dbl>, vap <dbl>,
+#> #   vap_white <dbl>, vap_black <dbl>, vap_hisp <dbl>, vap_aian <dbl>,
+#> #   vap_asian <dbl>, vap_nhpi <dbl>, vap_other <dbl>, vap_two <dbl>,
+#> #   reyni <dbl>, geometry <MULTIPOLYGON [°]>
+```
